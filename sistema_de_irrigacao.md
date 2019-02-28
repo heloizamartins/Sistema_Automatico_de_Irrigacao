@@ -24,25 +24,9 @@
 4. [DWARF](#dwarf)
 	* [Dwarf Register Numbers](#dwarf-register-numbers)
 
-### Absolute Addresses
+### 
 
-
-
-### Global Offset Table
-
-
-
-### Program Linkage Table
-
-
-### Procedure Calls
-
-
-### PC-Relative Jumps and Branches
-
-
-
-### PC-Relative Symbol Addresses
+# <a name=register-convention></a>
 
 
 
@@ -50,10 +34,5 @@
 
 
 
-### Initial Exec
-
-
-
-### Global Dynamic
 
 
