@@ -1,17 +1,23 @@
-# 
+# Sistema Automático de Irrigação - nome do produto
 
-## Table of Contents
-1. [nome](#nome)
-	* [subtitulo](#subtitulo)
+## Sumário
+1. [Nome do Produto](#Nome do Produto)
+	* [Descrição do Produto](#Descrição do Produto)
+2. [Materiais](#Materiais)
+	* [Sensor de Umidade](#Sensor de Umidade)
+	* [Sensor de Nível de Água](#Sensor de Nível de Água)
+	* [Motor](#Motor)
 
 ### 
 
-# <a name=nome></a> nome
-## subtitulo <a name=subtitulo>
+# <a name=Nome do Produto></a> Nome do Produto
+## Descrição do Produto <a name=Descrição do Produto>
+Muitas pessoas, hoje em dia, tem plantas nas suas residências, porém não providenciam cuidado necessário a elas, como por exemplo não irrigar no tempo . Por isso, este produto tem como objetivo  possuir um sistema automático para o controle de irrigação de plantas, tanto com a quantidade e a distribuição de água como o horário em que será fornecida. Isso tudo será automático, pré-definido pelo próprio usuário, de acordo com a planta monitorada, utilizando comunicação wireless.
+O produto conterá um sensor de umidade de solo, que fornecerá informações sobre o estado da planta e, a partir dessas, tomar a decisão de irrigá-la ou não. Além disso, possuirá um reservatório de água, o qual possuirá um sensor de nível, que mandará um aviso ao usuário quando a água estiver acabando. 
 
-### Local Exec
-
-
-
-
-
+# <a name=Materiais></a> Materiais
+## Sensor de Umidade <a name=Sensor de Umidade>
+	
+## Sensor de Nível de Água <a name=Sensor de Nível de Água>
+	
+## Motor <a name=Motor>
