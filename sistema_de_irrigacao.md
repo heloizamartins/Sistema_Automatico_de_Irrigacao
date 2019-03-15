@@ -25,16 +25,16 @@ O produto conterá um sensor de umidade de solo, que fornecerá informações so
 	
 ## Produtos Existentes <a name=Produtos-existentes>
 --------------------------------------------------------------------------------------------------------------------------------------
-	    		        | Lechuza      	| Oasis                  	| HIDROFERTI  			|   NOME              
---------------------------------|---------------|-------------------------------|-----------------------------------------------------
+Características	    		|    Lechuza   	| Oasis                  	| HIDROFERTI  			|   NOME              
+--------------------------------|---------------|-------------------------------|-------------------------------|----------------------
 Indicador de Nível de água      | x    		|                    		|				|x
 Reservatório de água     	| x    		| x         			| x				|x
 Controle da quantidade de água 	| x           	| x          			| x				|x
-Sistema de aeração     		| x           	|          			| 				|
+Sistema de aeração     		| x           	|        			| 				|
 Alimentação     	 	| não informado | Bateria 9V        		| 220V CA			|Bateria
 Configuração de tempo   	|         	| x    				| x				|x
 Distribuição de água   		| pavio        	| Gotejamento/gravidade 	| injeção direta/vazão e pressão|gotejamento
 Programa para controle		|         	| pré-definido pelo usuário 	| menu intuitivo		|celular
 Autonomia 			|        	| 20 plantas por 40 dias 	| 5 a 90 m^3/h			|30 dias
-Sinalização 			|         	| quando está em funcionamnto ou bateria baixa| entrada digital para até 12 sensores| em funcionamnto/ nível da água
-Sistema de comunicação 		|      		|    				|				| Wi-Fi 
+Sinalização 			|         	| em funcionamnto/bateria baix a| entrada digital/12 sensores	| em funcionamnto/ nível da água
+Sistema de comunicação 		|   		|    				|				| Wi-Fi 
