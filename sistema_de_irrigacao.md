@@ -3,6 +3,7 @@
 ## Sumário
 1. [Nome do Produto](#Nome-do-Produto)
 	* [Descrição do Produto](#Descricao-do-Produto)
+	* [Produtos Existentes](#Produtos-existenes)
 2. [Materiais](#Materiais)
 	* [Sensor de Umidade](#Sensor-de-Umidade)
 	* [Sensor de Nível de Água](#Sensor-de-Nivel-de-agua)
@@ -21,3 +22,19 @@ O produto conterá um sensor de umidade de solo, que fornecerá informações so
 ## Sensor de Nível de Água <a name=Sensor-de-Nivel-de-agua>
 	
 ## Motor <a name=Motor>
+	
+## Produtos Existentes <a name=Produtos-existentes>
+--------------------------------------------------------------------------------------------------------------------------------------
+	    		        | Lechuza      	| Oasis                  	| HIDROFERTI  			|   NOME              
+--------------------------------|---------------|-------------------------------|-----------------------------------------------------
+Indicador de Nível de água      | x    		|                    		|				|x
+Reservatório de água     	| x    		| x         			| x				|x
+Controle da quantidade de água 	| x           	| x          			| x				|x
+Sistema de aeração     		| x           	|          			| 				|
+Alimentação     	 	| não informado | Bateria 9V        		| 220V CA			|Bateria
+Configuração de tempo   	|         	| x    				| x				|x
+Distribuição de água   		| pavio        	| Gotejamento/gravidade 	| injeção direta/vazão e pressão|gotejamento
+Programa para controle		|         	| pré-definido pelo usuário 	| menu intuitivo		|celular
+Autonomia 			|        	| 20 plantas por 40 dias 	| 5 a 90 m^3/h			|30 dias
+Sinalização 			|         	| quando está em funcionamnto ou bateria baixa| entrada digital para até 12 sensores| em funcionamnto/ nível da água
+Sistema de comunicação 		|      		|    				|				| Wi-Fi 
