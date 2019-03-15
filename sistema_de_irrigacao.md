@@ -24,6 +24,7 @@ O produto conterá um sensor de umidade de solo, que fornecerá informações so
 ## Motor <a name=Motor>
 	
 ## Produtos Existentes <a name=Produtos-existentes>
+Para a definição deste produto, realizou-se uma pesquisa de mercado, onde foram destacadas as principais características existentes, apresentados na tabela abaixo.
 --------------------------------------------------------------------------------------------------------------------------------------
 Características	    		|    Lechuza   	| Oasis                  	| HIDROFERTI  			|   NOME              
 --------------------------------|---------------|-------------------------------|-------------------------------|----------------------
