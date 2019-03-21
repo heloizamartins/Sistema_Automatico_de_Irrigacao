@@ -16,7 +16,9 @@
 ## Descrição do Produto <a name=Descricao-do-Produto>
 Muitas pessoas, hoje em dia, tem plantas nas suas residências, porém não providenciam cuidado necessário a elas, como por exemplo não irrigar no tempo. Por isso, este produto tem como objetivo  possuir um sistema automático para o controle de irrigação de plantas, tanto com a quantidade e a distribuição de água como o horário em que será fornecida. Isso tudo será automático, pré-definido pelo próprio usuário, de acordo com a planta monitorada, utilizando comunicação wireless.
 O produto conterá um sensor de umidade de solo, que fornecerá informações sobre o estado da planta e, a partir dessas, tomar a decisão de irrigá-la ou não. Além disso, possuirá um reservatório de água, o qual possuirá um sensor de nível, que mandará um aviso ao usuário quando a água estiver acabando. 
-	
+
+![alt text](https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Diagrama%20de%20Blocos.jpg)
+
 ## Produtos Existentes <a name=Produtos-Existentes>
 
 Para a definição deste produto, realizou-se uma pesquisa de mercado, onde foram destacadas as principais características existentes, apresentados na tabela abaixo.
@@ -37,6 +39,7 @@ Sinalização 			|         	| em funcionamnto/bateria baix a| entrada digital/12
 Sistema de comunicação 		|   		|    				|				| Wi-Fi 
 
 Além desses produtos, também foram encontrados alguns projetos feitos para uso pessoal, utilizando o microcontrolador Arduino. No entanto, a maioria não tinha um reservatório de água, nem um meio para mandar água automaticamente para a planta, apenas os dados do sensor de umidade eram mandados para um dispositivo, para que a irrigação fosse feita manualmente.
+
 
 # <a name=Materiais></a> Materiais
 ## Sensor de Umidade <a name=Sensor-de-Umidade>
