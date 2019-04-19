@@ -54,5 +54,7 @@ O circuito empregado para a aquisição de dados foi um divisor de tensão alime
 ## Sensor de Nível de Água <a name=Sensor-de-Nivel-de-agua>
 	
 ## Motor <a name=Motor>
-	
+
+![alt text](https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Motor.jpg)
+
 # <a name=referencia></a> Referências
