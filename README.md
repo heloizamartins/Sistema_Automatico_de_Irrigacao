@@ -54,6 +54,9 @@ O circuito empregado para a aquisição de dados foi um divisor de tensão alime
 ## Sensor de Nível de Água <a name=Sensor-de-Nivel-de-agua>
 	
 ## Motor <a name=Motor>
+	
+O motor escolhido para fazer parte do produto foi uma bomba d'água submersível, de 3,6 V com capacidade de 120L/h. Para fazer o uso dessa bomba foi montado o circuito da Figura abaixo, que consiste em um transistor NPN, permitindo controlar os estados ligado e desligado, além da sua velocidade. O resistor conectado na entrada do circuito será ligado no microcontrolador, e serve para limitar a corrente que fará o chaveamento do transistor. O diodo atua como proteção para quando há o efeito de tensão reversa causado em cargas indutivas quando a energia é cortada.
+A velocidade do motor será controlada por PWM, de acordo com a necessidade de água que a planta necessita, informação que será adquirida pelo sensor de umidade, e processada pelo microcontrolador, para que então possa ser regulada a quantidade de água que irá irrigar a planta.
 
 ![alt text](https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Motor.jpg)
 
