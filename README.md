@@ -50,7 +50,7 @@ Para a verificação da umidade do solo, utilizou-se o sensor de umidade do solo
 
 O circuito empregado para a aquisição de dados foi um divisor de tensão alimentado a 3.3V, representado pela Figura abaixo. Os dois pinos do sensor estão em série o resistor de 10㏀, e em paralelo com o capacitor de 10nF, que tem a função de remover os picos indesejados nos trilhos de energia. A saída do divisor é conectada ao conversor AD do microcontrolador para ler o seu valor de tensão e calcular a resistência do sensor. Essa irá ser máxima e muito maior que 10㏀, quando o solo está seco, assim, a saída irá ter o mesmo valor de alimentação (efeito pull-up do resistor de 10㏀). Caso contrário, a saída terá o valor referente à queda de tensão na eletrodos do sensor, que será um valor bem menor.
 
-![alt text](https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/sensor_Umidade_circuito.jpg)
+![alt text](https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/sensor_Umidade_circuito.jpg)
 ## Sensor de Nível de Água <a name=Sensor-de-Nivel-de-agua>
 	
 ## Motor <a name=Motor>
