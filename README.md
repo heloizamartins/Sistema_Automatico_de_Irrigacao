@@ -46,11 +46,17 @@ Além desses produtos, também foram encontrados alguns projetos feitos para uso
 	
 Para a verificação da umidade do solo, utilizou-se o sensor de umidade do solo Higrômetro HL-69, Figura abaixo. O princípio de funcionamento deste sensor é da seguinte forma, através da aplicação de uma determinada corrente nos seus eletrodos existentes nas hastes, é possível estimar quão úmido ou seco o solo está, devido a condutividade do solo. Sendo que, quando o solo estiver úmido há uma condutividade maior, que resulta num fluxo maior de corrente entre os dois eletrodos. E quando o solo estiver seco, ocorrerá o oposto, pouca corrente passará. 
 
-![alt text](https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/sensor-de-umidade-do-solo-higrmetro.jpg)
+
+<p align="center">
+  <img width="400"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/sensor-de-umidade-do-solo-higrmetro.jpg">
+</p>
 
 O circuito empregado para a aquisição de dados foi um divisor de tensão alimentado a 3.3V, representado pela Figura abaixo. Os dois pinos do sensor estão em série o resistor de 10㏀, e em paralelo com o capacitor de 10nF, que tem a função de remover os picos indesejados nos trilhos de energia. A saída do divisor é conectada ao conversor AD do microcontrolador para ler o seu valor de tensão e calcular a resistência do sensor. Essa irá ser máxima e muito maior que 10㏀, quando o solo está seco, assim, a saída irá ter o mesmo valor de alimentação (efeito pull-up do resistor de 10㏀). Caso contrário, a saída terá o valor referente à queda de tensão na eletrodos do sensor, que será um valor bem menor.
 
-![alt text](https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/sensor_Umidade_circuito.jpg)
+<p align="center">
+  <img width="400"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/sensor_Umidade_circuito.jpg">
+</p>
+
 ## Sensor de Nível de Água <a name=Sensor-de-Nivel-de-agua>
 	
 ## Motor <a name=Motor>
@@ -59,8 +65,14 @@ O motor escolhido para fazer parte do produto foi uma bomba d'água submersível
 
 A velocidade do motor será controlada por PWM, de acordo com a necessidade de água que a planta necessita, informação que será adquirida pelo sensor de umidade, e processada pelo microcontrolador, para que então possa ser regulada a quantidade de água que irá irrigar a planta.
 
-![alt text](https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Micro-Water-Pump-DC-3V-5V-Submersible.jpg?v=4&s=5)
 
-![alt text](https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Motor.jpg)
+<p align="center">
+  <img width="400"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Micro-Water-Pump-DC-3V-5V-Submersible.jpg">
+</p>
+
+<p align="center">
+  <img width="400"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Motor.jpg">
+</p>
+
 
 # <a name=referencia></a> Referências
