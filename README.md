@@ -67,7 +67,7 @@ A velocidade do motor ser√° controlada por PWM, de acordo com a necessidade de √
 
 
 <p align="center">
-  <img width="400"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Micro-Water-Pump-DC-3V-5V-Submersible.jpg">
+  <img width="350"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Micro-Water-Pump-DC-3V-5V-Submersible.jpg">
 </p>
 
 <p align="center">
