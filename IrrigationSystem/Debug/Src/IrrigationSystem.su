@@ -1,0 +1,5 @@
+IrrigationSystem.c:15:6:IrrigationSystem_init	0	static
+IrrigationSystem.c:19:6:Read_Humidity_sensor	0	static
+IrrigationSystem.c:36:6:Humidity_Sensor_init	8	static
+IrrigationSystem.c:41:6:HAL_ADC_ConvHalfCpltCallback	0	static
+IrrigationSystem.c:49:6:HAL_ADC_ConvCpltCallback	0	static
