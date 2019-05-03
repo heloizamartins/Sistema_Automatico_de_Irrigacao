@@ -366,7 +366,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(INTERNAL_LED_GPIO_Port, INTERNAL_LED_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, DEBUG_0_Pin|DEBUG_1_Pin|DEBUG_2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, LED_Motor_Pin|DEBUG_1_Pin|DEBUG_2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : INTERNAL_LED_Pin */
   GPIO_InitStruct.Pin = INTERNAL_LED_Pin;
@@ -375,8 +375,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(INTERNAL_LED_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : DEBUG_0_Pin DEBUG_1_Pin DEBUG_2_Pin */
-  GPIO_InitStruct.Pin = DEBUG_0_Pin|DEBUG_1_Pin|DEBUG_2_Pin;
+  /*Configure GPIO pins : LED_Motor_Pin DEBUG_1_Pin DEBUG_2_Pin */
+  GPIO_InitStruct.Pin = LED_Motor_Pin|DEBUG_1_Pin|DEBUG_2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;

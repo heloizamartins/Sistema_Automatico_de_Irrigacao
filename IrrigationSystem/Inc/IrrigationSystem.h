@@ -11,6 +11,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include "stm32f1xx_hal.h"
+#include "main.h"
 
 #define ADC_CHANNELS_PER_SAMPLE 1
 #define ADC_SAMPLES_PER_BUFFER 8
@@ -28,5 +29,9 @@ typedef union
 void IrrigationSystem_init();
 void Humidity_Sensor_init(ADC_HandleTypeDef* hadc);
 void Read_sensores(IrrigationSystem_t *sensor);
-void Read_Humidity_sensor(IrrigationSystem_t *sensor);
+uint32_t Read_Humidity_sensor(IrrigationSystem_t *sensor);
+void Verify_Humidity(IrrigationSystem_t *sensor, uint8_t min_humidity);
+void Turn_On_Motor();
+void Turn_Off_Motor();
+
 #endif /* GY_80_ADXL345_H_ */
