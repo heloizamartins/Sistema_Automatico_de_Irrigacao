@@ -1,13 +1,11 @@
 /*
  * modbus.c
  *
- *  Created on: 6 de dez de 2018
+ *  Created on: 3 de maio de 2017
  *      Author: Heloiza S. and Suzi Y.
  */
 
-
 #include "modbus.h"
-
 
 char txDmaBuffer[TX_BUFFER_SIZE];
 //char rxDmaBuffer[RX_BUFFER_SIZE];
@@ -103,7 +101,7 @@ of a value of type uint16_t
 *****************************************************************/
 uint16_t swap_bytes(uint16_t data)
 {
-	int16_t new_data, data_;
+	uint16_t new_data, data_;
 	new_data = data >>8;
 	data_ = data <<8;
 	new_data |= data_;
