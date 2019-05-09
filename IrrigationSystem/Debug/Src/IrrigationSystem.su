@@ -1,8 +1,9 @@
 IrrigationSystem.c:15:6:IrrigationSystem_init	0	static
 IrrigationSystem.c:19:10:Read_Humidity_sensor	20	static
-IrrigationSystem.c:39:6:Humidity_Sensor_init	8	static
-IrrigationSystem.c:55:6:Turn_On_Motor	0	static
-IrrigationSystem.c:44:6:Verify_Humidity	16	static
-IrrigationSystem.c:61:6:Turn_Off_Motor	0	static
-IrrigationSystem.c:67:6:HAL_ADC_ConvHalfCpltCallback	0	static
-IrrigationSystem.c:75:6:HAL_ADC_ConvCpltCallback	0	static
+IrrigationSystem.c:38:6:Humidity_Sensor_init	8	static
+IrrigationSystem.c:43:6:Motor_pwm_init	0	static
+IrrigationSystem.c:47:6:Verify_Humidity	16	static
+IrrigationSystem.c:58:6:Turn_On_Motor	0	static
+IrrigationSystem.c:66:6:Turn_Off_Motor	0	static
+IrrigationSystem.c:73:6:HAL_ADC_ConvHalfCpltCallback	0	static
+IrrigationSystem.c:80:6:HAL_ADC_ConvCpltCallback	0	static

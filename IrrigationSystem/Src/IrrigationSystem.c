@@ -28,9 +28,8 @@ uint32_t Read_Humidity_sensor(IrrigationSystem_t *sensor){
 			  values += adcDmaBuffer[adcDmaBufferIndex+i];
 		  }
 		  sensor[0].humidity = (values/ADC_DMA_BUFFER_SIZE)*2;
+		  sensor[0].humidity = 100 - ((sensor[0].humidity*100)/4096);
 		  ADCReady = RESET;
-
-		  //RTU_package_IrrigationSystem(&pkg, (uint16_t)values, &huart1);
 	  }
 	}
 	return values;
@@ -41,26 +40,33 @@ void Humidity_Sensor_init(ADC_HandleTypeDef* hadc){
 	HAL_ADC_Start_DMA(hadc, (uint32_t *)adcDmaBuffer, ADC_DMA_BUFFER_SIZE);
 }
 
+void Motor_pwm_init(TIM_HandleTypeDef *htim, uint32_t Channel){
+	HAL_TIM_PWM_Start(htim, Channel);
+}
+
 void Verify_Humidity(IrrigationSystem_t *sensor, uint8_t min_humidity)
 {
 	//min_humidity = porcentagem de umidade minima - 0:1:100
 	uint32_t humidity;
 	humidity = Read_Humidity_sensor(sensor);
 	while(humidity < 3500){
-		Turn_On_Motor();
+		//Turn_On_Motor();
 		HAL_Delay(10000);
 	}
 }
 
-void Turn_On_Motor()
+void Turn_On_Motor(uint8_t pwm, TIM_HandleTypeDef *htim, uint32_t Channel)
 {
 	//PWM - depende do tamanho do reservatório
+	__HAL_TIM_SET_COMPARE(htim, Channel, pwm);
 	HAL_GPIO_WritePin(LED_Motor_GPIO_Port, LED_Motor_Pin, SET);
+
 }
 
-void Turn_Off_Motor()
+void Turn_Off_Motor(TIM_HandleTypeDef *htim, uint32_t Channel)
 {
 	//PWM = 0;
+	__HAL_TIM_SET_COMPARE(htim, Channel, 0);
 	HAL_GPIO_WritePin(LED_Motor_GPIO_Port, LED_Motor_Pin, RESET);
 }
 
@@ -68,14 +74,12 @@ void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc)
 {
 	adcDmaBufferIndex=0;
 	ADCReady= SET;
-	//systemFlags.convReady = 1;
-	//HAL_GPIO_TogglePin(DEBUG_3_GPIO_Port, DEBUG_3_Pin);
+
 }
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 {
 	adcDmaBufferIndex = (ADC_DMA_BUFFER_SIZE / 2);
 	ADCReady= SET;
-	//systemFlags.convReady = 1;
-	//HAL_GPIO_TogglePin(DEBUG_2_GPIO_Port, DEBUG_2_Pin);
+
 }

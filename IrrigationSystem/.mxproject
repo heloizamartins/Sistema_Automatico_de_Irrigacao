@@ -1,7 +1,7 @@
 [PreviousGenFiles]
-HeaderPath=C:/Users/Suzi/Documents/ADC_DMA_Timer/Inc
+HeaderPath=C:/Users/Suzi/Documents/GitHub/Sistema_Automatico_de_Irrigacao/IrrigationSystem/Inc
 HeaderFiles=stm32f1xx_it.h;stm32f1xx_hal_conf.h;main.h;
-SourcePath=C:/Users/Suzi/Documents/ADC_DMA_Timer/Src
+SourcePath=C:/Users/Suzi/Documents/GitHub/Sistema_Automatico_de_Irrigacao/IrrigationSystem/Src
 SourceFiles=stm32f1xx_it.c;stm32f1xx_hal_msp.c;main.c;
 
 [PreviousLibFiles]

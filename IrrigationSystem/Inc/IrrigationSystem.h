@@ -31,7 +31,8 @@ void Humidity_Sensor_init(ADC_HandleTypeDef* hadc);
 void Read_sensores(IrrigationSystem_t *sensor);
 uint32_t Read_Humidity_sensor(IrrigationSystem_t *sensor);
 void Verify_Humidity(IrrigationSystem_t *sensor, uint8_t min_humidity);
-void Turn_On_Motor();
-void Turn_Off_Motor();
+void Motor_pwm_init(TIM_HandleTypeDef *htim, uint32_t Channel);
+void Turn_On_Motor(uint8_t pwm, TIM_HandleTypeDef *htim, uint32_t Channel);
+void Turn_Off_Motor(TIM_HandleTypeDef *htim, uint32_t Channel);
 
 #endif /* GY_80_ADXL345_H_ */
