@@ -58,6 +58,12 @@ O circuito empregado para a aquisição de dados foi um divisor de tensão alime
 </p>
 
 ## Sensor de Nível de Água <a name=Sensor-de-Nivel-de-agua>
+
+Para medir o nível d’água optou-se por produzir um sensor capacitivo, que consiste em uma placa interdigitada, cujo layout pode ser visto a seguir. 
+
+<p align="center">
+  <img width="80"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Placa_Interdigitada.jpg">
+</p>
 	
 ## Motor <a name=Motor>
 	
