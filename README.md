@@ -8,6 +8,7 @@
 	* [Sensor de Umidade](#Sensor-de-Umidade)
 	* [Sensor de Nível de Água](#Sensor-de-Nivel-de-agua)
 	* [Motor](#Motor)
+	* [Comunicação Wi-Fi](#comunicacao)
 	* [Alimentação](#Alimentacao)
 3. [Referências](#referencia)
 
@@ -74,14 +75,23 @@ A velocidade do motor será controlada por PWM, de acordo com a necessidade de �
 
 
 <p align="center">
-  <img width="350"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Micro-Water-Pump-DC-3V-5V-Submersible.jpg">
+  <img width="300"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Micro-Water-Pump-DC-3V-5V-Submersible.jpg">
 </p>
 
 <p align="center">
-  <img width="400"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Motor.jpg">
+  <img width="600"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Motor.jpg">
+</p>
+	
+## Comunicação Wi-Fi <a name=comunicacao>
+
+<p align="center">
+  <img width="400"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/ESP8266_.jpg">
 </p>
 
 ## Alimentação <a name=Alimentacao>
-
+	
+<p align="center">
+  <img width="600"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/alimentacao.png">
+</p>
 
 # <a name=referencia></a> Referências
