@@ -75,11 +75,7 @@ A velocidade do motor será controlada por PWM, de acordo com a necessidade de �
 
 
 <p align="center">
-  <img width="300"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Micro-Water-Pump-DC-3V-5V-Submersible.jpg">
-</p>
-
-<p align="center">
-  <img width="600"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Motor.jpg">
+  <img width="800"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Motor.jpg">
 </p>
 	
 ## Comunicação Wi-Fi <a name=comunicacao>
