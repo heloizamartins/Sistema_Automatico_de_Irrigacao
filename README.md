@@ -8,6 +8,7 @@
 	* [Sensor de Umidade](#Sensor-de-Umidade)
 	* [Sensor de Nível de Água](#Sensor-de-Nivel-de-agua)
 	* [Motor](#Motor)
+	* [Comunicação Wi-Fi](#comunicacao)
 	* [Alimentação](#Alimentacao)
 3. [Referências](#referencia)
 
@@ -74,14 +75,39 @@ A velocidade do motor será controlada por PWM, de acordo com a necessidade de �
 
 
 <p align="center">
-  <img width="350"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Micro-Water-Pump-DC-3V-5V-Submersible.jpg">
+  <img width="300"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Micro-Water-Pump-DC-3V-5V-Submersible.jpg">
 </p>
 
 <p align="center">
-  <img width="400"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Motor.jpg">
+  <img width="600"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Motor.jpg">
+</p>
+	
+## Comunicação Wi-Fi <a name=comunicacao>
+Após o condicionamento dos dados dos sensores, estes valores foram enviados ao módulo **WiFi ESP8266 ESP-01**, que enviará os dados do sensor à Internet através do protocolo MQTT (*Message Queuing Telemetry Transport*). Para isso, utilizou-se o arquivo `modbus.c`, onde foi enviado o pacote RTU contendo (*addr, cmd, reg, data, crc*) 
+
+* **addr**: endereço do dispositivo que se deseja enviar uma mensagem (0x15) (1 byte)
+
+* **cmd**: comando que se deseja enviar, geralmente escrita (0x01) ou leitura (0x02). (1 byte)
+
+* **reg**: qual registrador do dispositivo deseja-se escrever ou ler. (2 bytes)
+
+* **data**: dado que se deseja escrever no registrador ou número de registradores que se deseja ler. (2 bytes)
+
+* **crc**: verificação cíclica de redundância. (2 bytes)
+
+:red_circle: Para o envio dos dados que são de 2 bytes, foi necessário trocar os primeiros dois bytes com os dois últimos, pois o Modbus é do tipo big endian.
+
+
+Os resultados foram visualizados através do aplicativo **MQTT Dash**, disponível para android, onde é possível visualizar as duas medidas, de umidade e de nível de água.
+
+<p align="center">
+  <img width="400"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/ESP8266_.jpg">
 </p>
 
 ## Alimentação <a name=Alimentacao>
-
+	
+<p align="center">
+  <img width="600"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/alimentacao.png">
+</p>
 
 # <a name=referencia></a> Referências
