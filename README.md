@@ -8,6 +8,7 @@
 	* [Sensor de Umidade](#Sensor-de-Umidade)
 	* [Sensor de Nível de Água](#Sensor-de-Nivel-de-agua)
 	* [Motor](#Motor)
+	* [Alimentação](#Alimentacao)
 3. [Referências](#referencia)
 
 ### 
@@ -79,6 +80,8 @@ A velocidade do motor será controlada por PWM, de acordo com a necessidade de �
 <p align="center">
   <img width="400"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Motor.jpg">
 </p>
+
+## Alimentação <a name=Alimentacao>
 
 
 # <a name=referencia></a> Referências
