@@ -10,7 +10,8 @@
 	* [Motor](#Motor)
 	* [Comunicação Wi-Fi](#comunicacao)
 	* [Alimentação](#Alimentacao)
-3. [Referências](#referencia)
+3. [Resultados](#Resultados)
+4. [Referências](#referencia)
 
 ### 
 
@@ -93,7 +94,7 @@ Após o condicionamento dos dados dos sensores, estes valores foram enviados ao 
 :red_circle: Para o envio dos dados que são de 2 bytes, foi necessário trocar os primeiros dois bytes com os dois últimos, pois o Modbus é do tipo big endian.
 
 
-Os resultados foram visualizados através do aplicativo **MQTT Dash**, disponível para android, onde é possível visualizar as duas medidas, de umidade e de nível de água.
+Os resultados podem ser visualizados através do aplicativo **MQTT Dash**, disponível para android, onde é possível visualizar as duas medidas, de umidade e de nível de água.
 
 <p align="center">
   <img width="600"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/ESP8266_.jpg">
@@ -104,5 +105,7 @@ Os resultados foram visualizados através do aplicativo **MQTT Dash**, disponív
 <p align="center">
   <img width="600"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/alimentacao.png">
 </p>
+
+# <a name=Resultados></a> Resultados
 
 # <a name=referencia></a> Referências
