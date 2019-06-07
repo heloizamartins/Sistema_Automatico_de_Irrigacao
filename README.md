@@ -69,10 +69,9 @@ Para medir o nível d’água optou-se por produzir um sensor capacitivo, que co
 	
 ## Motor <a name=Motor>
 	
-O motor escolhido para fazer parte do produto foi uma bomba d'água submersível, de 3,6 V com capacidade de 120L/h, que pode ser vista na Figura que segue. Para fazer o uso dessa bomba foi montado o circuito da Figura abaixo, que consiste em um transistor NPN, permitindo controlar os estados ligado e desligado do motor, além de sua velocidade. O resistor conectado na entrada do circuito será ligado no microcontrolador, e serve para limitar a corrente que fará o chaveamento do transistor. O diodo atua como proteção para quando há o efeito de tensão reversa causado em cargas indutivas quando a energia é cortada.
+O motor escolhido para fazer parte do produto foi uma bomba d'água submersível, de 3,6 V com capacidade de 120L/h, que pode ser vista na Figura que segue. O acionamento do motor é feito por um regulador de corrente, LM317, controlado por tensão, limitando uma corrente máxima necessária para o seu funcionamento.  A tensão de entrada é adquirida por um sinal de PWM gerado pelo microcontrolador, o qual modifica a velocidade do motor de acordo com o duty cycle definido. 
 
-A velocidade do motor será controlada por PWM, de acordo com a necessidade de água que a planta necessita, informação que será adquirida pelo sensor de umidade, e processada pelo microcontrolador, para que então possa ser regulada a quantidade de água que irá irrigar a planta.
-
+Na saída do microcontrolador utilizou-se o um transistor como inversor garantindo uma tensão de 5V quando está em alto em vez de 3.3V, tensão necessário para o funcionamento do curcuito. O amplificador TL071 opera como seguidor de tensão, o qual tem a finalidade de de isolar as variações do sinal de PWM do transistor BC337, tendo assim mais segurança de que não haverá interferência no circuito. O transistor BC337 atua como amplificador de corrente.
 
 <p align="center">
   <img width="800"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Motor.jpg">
