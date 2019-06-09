@@ -105,7 +105,12 @@ Os resultados podem ser visualizados através do aplicativo **MQTT Dash**, dispo
 </p>
 
 ## Alimentação <a name=Alimentacao>
-	
+A alimentação do produto é feita a partir de uma bateria recarregável. Para o melhor aproveitamento, o circuito já contém um módulo carregador USB de baterias, permitindo, então, que o cliente possa sempre fazer o reuso dessa bateria, apenas carregando-a quando necessário. 
+
+Além disso, para a alimentação de alguns circuitos utilizados era necessário tensões de 5V e 9V. Por isso, a placa de alimentação foi composta por um boost, responsável por elevar a tensão fornecida pela bateria até 9V. Essa é tensão que alimenta o circuito do motor, e para os outros circuitos, utilizou-se um regulador de tensão 7805, que fornece como saída 5V, que irá alimentar o microcontrolador, o qual será o responsável por fornecer a tensão necessário para os outros circuitos.
+
+Abaixo é possível observar o esquemático utilizado para a alimentação.
+
 <p align="center">
   <img width="600"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/alimentacao.png">
 </p>
