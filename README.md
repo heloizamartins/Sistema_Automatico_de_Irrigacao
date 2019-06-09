@@ -63,7 +63,9 @@ O circuito empregado para a aquisição de dados foi um divisor de tensão alime
 ## Sensor de Nível de Água <a name=Sensor-de-Nivel-de-agua>
 
 Para medir o nível d’água optou-se por produzir um sensor capacitivo de placa interdigitada, cujo layout pode ser visto a seguir. 
+
 Um capacitor interdigitado é uma estrutura coplanar que contém múltiplos eletrodos de pentes interpenetrante, e seu princípio de funcionamento é similar a de um capacitor de placas paralelas. Ao aplicar uma diferença de potencial em cada pente de eletrodos, é gerado um campo elétrico entre o positivo e o negativo dos eletrodos. A partir desse campo, do material e das dimensões da placa, é possível obter o valor da capacitância.
+
 Para realizar a medida do nível de água, será lido o valor do capacitor, que irá variar de acordo com a quantidade de água e de ar em contato com o capacitor.
 
 <p align="center">
