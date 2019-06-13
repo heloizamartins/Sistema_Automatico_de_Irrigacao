@@ -43,6 +43,19 @@ uint32_t Read_Humidity_sensor(IrrigationSystem_t *sensor){
 	return humidity_value;
 }
 
+void Verify_Humidity(IrrigationSystem_t *sensor, uint8_t min_humidity)
+{
+	//min_humidity = porcentagem de umidade minima - 0:1:100
+	uint32_t humidity;
+	humidity = Read_Humidity_sensor(sensor);
+	while(humidity < min_humidity){
+		Turn_On_Motor(180);
+		HAL_Delay(10000);
+		Read_Humidity_sensor(sensor);
+	}
+	Turn_Off_Motor();
+}
+
 uint32_t Read_Level_sensor(IrrigationSystem_t *sensor){
 	uint32_t cap_value=0;
 
@@ -59,29 +72,28 @@ uint32_t Read_Level_sensor(IrrigationSystem_t *sensor){
 	return cap_value;
 }
 
-void Verify_Humidity(IrrigationSystem_t *sensor, uint8_t min_humidity)
+void Verify_Water_Level(IrrigationSystem_t *sensor)
 {
-	//min_humidity = porcentagem de umidade minima - 0:1:100
-	uint32_t humidity;
-	humidity = Read_Humidity_sensor(sensor);
-	while(humidity < 3500){
-		//Turn_On_Motor();
-		HAL_Delay(10000);
-	}
+	uint32_t water_level;
+	water_level = Read_Level_sensor(sensor);
+	if(water_level <= MIN_WATER_LEVEL){
+		sensor->level_warning = 1;
+	}else
+		sensor->level_warning = 0;
 }
 
-void Turn_On_Motor(uint8_t pwm, TIM_HandleTypeDef *htim, uint32_t Channel)
+void Turn_On_Motor(uint8_t pwm)
 {
 	//PWM - depende do tamanho do reservatório
 	pwm = 200-pwm;  //há inversor
-	__HAL_TIM_SET_COMPARE(htim, Channel, pwm);
+	__HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, pwm);
 	HAL_GPIO_WritePin(LED_MOTOR_GPIO_Port, LED_MOTOR_Pin, SET);
 
 }
 
-void Turn_Off_Motor(TIM_HandleTypeDef *htim, uint32_t Channel)
+void Turn_Off_Motor()
 {
-	__HAL_TIM_SET_COMPARE(htim, Channel, 200);
+	__HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 200);
 	HAL_GPIO_WritePin(LED_MOTOR_GPIO_Port, LED_MOTOR_Pin, RESET);
 }
 

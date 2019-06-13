@@ -70,9 +70,9 @@
 DMA_HandleTypeDef hdma_adc1;
 
 TIM_HandleTypeDef htim1;
-TIM_HandleTypeDef htim2;*/
+TIM_HandleTypeDef htim2;
 
-/*UART_HandleTypeDef huart1;
+UART_HandleTypeDef huart1;
 DMA_HandleTypeDef hdma_usart1_rx;
 DMA_HandleTypeDef hdma_usart1_tx;*/
 
@@ -135,18 +135,6 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   IrrigationSystem_init();
-  //Motor PWM init
-  //Motor_pwm_init(&htim1, TIM_CHANNEL_1);
-
-  /*HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_2);
-  HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_3);
-  HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_4);
-  __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_3, 15750);
-  __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, 2000);*/
-
-
-  //Humidity sensor init
-  //Humidity_Sensor_init(&hadc1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -155,11 +143,7 @@ int main(void)
     {
 	  //send package of MODBUS
 	  RTU_package_IrrigationSystem(&pkg, &IS, &huart1);
-	  //__HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 0);
-	    /*Turn_On_Motor(0, &htim1, TIM_CHANNEL_1);
-	    HAL_Delay(5000);
-	    Turn_Off_Motor(&htim1, TIM_CHANNEL_1);
-	    HAL_Delay(5000);*/
+	  Verify_Humidity(&IS, 40);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

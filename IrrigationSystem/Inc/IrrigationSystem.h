@@ -14,6 +14,7 @@
 #include "main.h"
 #define ADC_MAX_LEVEL 1700
 #define ADC_MIN_LEVEL 1400
+#define MIN_WATER_LEVEL 20
 
 ADC_HandleTypeDef hadc1;
 DMA_HandleTypeDef hdma_adc1;
@@ -26,15 +27,17 @@ typedef union
 	struct {
 		uint16_t humidity;
 		uint16_t level;
+		uint16_t level_warning;
 	};
-	uint16_t sensor[2];
+	uint16_t sensor[3];
 }IrrigationSystem_t;
 
 void IrrigationSystem_init();
 uint32_t Read_Humidity_sensor(IrrigationSystem_t *sensor);
-uint32_t Read_Level_sensor(IrrigationSystem_t *sensor);
 void Verify_Humidity(IrrigationSystem_t *sensor, uint8_t min_humidity);
-void Turn_On_Motor(uint8_t pwm, TIM_HandleTypeDef *htim, uint32_t Channel);
-void Turn_Off_Motor(TIM_HandleTypeDef *htim, uint32_t Channel);
+uint32_t Read_Level_sensor(IrrigationSystem_t *sensor);
+void Verify_Water_Level(IrrigationSystem_t *sensor);
+void Turn_On_Motor(uint8_t pwm);
+void Turn_Off_Motor();
 
 #endif /* GY_80_ADXL345_H_ */
