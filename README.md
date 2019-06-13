@@ -10,7 +10,8 @@
 	* [Motor](#Motor)
 	* [Comunicação Wi-Fi](#comunicacao)
 	* [Alimentação](#Alimentacao)
-3. [Referências](#referencia)
+3. [Resultados](#Resultados)
+4. [Referências](#referencia)
 
 ### 
 
@@ -61,7 +62,11 @@ O circuito empregado para a aquisição de dados foi um divisor de tensão alime
 
 ## Sensor de Nível de Água <a name=Sensor-de-Nivel-de-agua>
 
-Para medir o nível d’água optou-se por produzir um sensor capacitivo, que consiste em uma placa interdigitada, cujo layout pode ser visto a seguir. 
+Para medir o nível d’água optou-se por produzir um sensor capacitivo de placa interdigitada, cujo layout pode ser visto a seguir. 
+
+Um capacitor interdigitado é uma estrutura coplanar que contém múltiplos eletrodos de pentes interpenetrante, e seu princípio de funcionamento é similar a de um capacitor de placas paralelas. Ao aplicar uma diferença de potencial em cada pente de eletrodos, é gerado um campo elétrico entre o positivo e o negativo dos eletrodos. A partir desse campo, do material e das dimensões da placa, é possível obter o valor da capacitância.
+
+Para realizar a medida do nível de água, será lido o valor do capacitor, que irá variar de acordo com a quantidade de água e de ar em contato com o capacitor.
 
 <p align="center">
   <img width="80"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Placa_Interdigitada.jpg">
@@ -69,10 +74,9 @@ Para medir o nível d’água optou-se por produzir um sensor capacitivo, que co
 	
 ## Motor <a name=Motor>
 	
-O motor escolhido para fazer parte do produto foi uma bomba d'água submersível, de 3,6 V com capacidade de 120L/h, que pode ser vista na Figura que segue. Para fazer o uso dessa bomba foi montado o circuito da Figura abaixo, que consiste em um transistor NPN, permitindo controlar os estados ligado e desligado do motor, além de sua velocidade. O resistor conectado na entrada do circuito será ligado no microcontrolador, e serve para limitar a corrente que fará o chaveamento do transistor. O diodo atua como proteção para quando há o efeito de tensão reversa causado em cargas indutivas quando a energia é cortada.
+O motor escolhido para fazer parte do produto foi uma bomba d'água submersível, de 3,6 V com capacidade de 120L/h, que pode ser vista na Figura que segue. O acionamento do motor é feito por um regulador de corrente, LM317, controlado por tensão, limitando uma corrente máxima necessária para o seu funcionamento.  A tensão de entrada é adquirida por um sinal de PWM gerado pelo microcontrolador, o qual modifica a velocidade do motor de acordo com o *duty cycle* definido. 
 
-A velocidade do motor será controlada por PWM, de acordo com a necessidade de água que a planta necessita, informação que será adquirida pelo sensor de umidade, e processada pelo microcontrolador, para que então possa ser regulada a quantidade de água que irá irrigar a planta.
-
+Na saída do microcontrolador utilizou-se o um transistor como inversor garantindo uma tensão de 5V quando está em alto em vez de 3.3V, tensão necessária para o funcionamento do curcuito. O amplificador TL071 opera como seguidor de tensão, o qual tem a finalidade de de isolar as variações do sinal de PWM do transistor BC337, tendo assim mais segurança de que não haverá interferência no circuito. O transistor BC337 atua como amplificador de corrente.
 
 <p align="center">
   <img width="800"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Motor.jpg">
@@ -94,16 +98,23 @@ Após o condicionamento dos dados dos sensores, estes valores foram enviados ao 
 :red_circle: Para o envio dos dados que são de 2 bytes, foi necessário trocar os primeiros dois bytes com os dois últimos, pois o Modbus é do tipo big endian.
 
 
-Os resultados foram visualizados através do aplicativo **MQTT Dash**, disponível para android, onde é possível visualizar as duas medidas, de umidade e de nível de água.
+Os resultados podem ser visualizados através do aplicativo **MQTT Dash**, disponível para android, onde é possível visualizar as duas medidas, de umidade e de nível de água.
 
 <p align="center">
   <img width="600"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/ESP8266_.jpg">
 </p>
 
 ## Alimentação <a name=Alimentacao>
-	
+A alimentação do produto é feita a partir de uma bateria recarregável. Para o melhor aproveitamento, o circuito já contém um módulo carregador USB de baterias, permitindo, então, que o cliente possa sempre fazer o reuso dessa bateria, apenas carregando-a quando necessário. 
+
+Além disso, para a alimentação de alguns circuitos utilizados era necessário tensões de 5V e 9V. Por isso, a placa de alimentação foi composta por um boost, responsável por elevar a tensão fornecida pela bateria até 9V. Essa é tensão que alimenta o circuito do motor, e para os outros circuitos, utilizou-se um regulador de tensão 7805, que fornece como saída 5V, que irá alimentar o microcontrolador, o qual será o responsável por fornecer a tensão necessário para os outros circuitos.
+
+Abaixo é possível observar o esquemático utilizado para a alimentação.
+
 <p align="center">
   <img width="600"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/alimentacao.png">
 </p>
+
+# <a name=Resultados></a> Resultados
 
 # <a name=referencia></a> Referências
