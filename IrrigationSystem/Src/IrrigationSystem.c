@@ -8,40 +8,55 @@
 
 #include "IrrigationSystem.h"
 
-uint16_t adcDmaBuffer[ADC_DMA_BUFFER_SIZE];
-volatile uint8_t adcDmaBufferIndex = 0;
-__IO ITStatus ADCReady = RESET;
+uint32_t adcDmaBuffer[2];
+volatile uint32_t adc_value[2];
 
 void IrrigationSystem_init(){
+	//Motor PWM Init
+	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+
+	//Timer 2 capture compare 2 event for ADC1
+	HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_2);
+	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, 2000);
+
+	//PWM for capacitor charging and discharging
+	HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_3);
+	HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_4);
+	__HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_3, 15750);
+
+	//ADC Init
+	HAL_ADCEx_Calibration_Start(&hadc1);
+	HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adcDmaBuffer, 2);
+	HAL_ADC_Start_IT(&hadc1);
 
 }
 
 uint32_t Read_Humidity_sensor(IrrigationSystem_t *sensor){
-	uint8_t counter = 0;
-	uint32_t values = 0;
-	while(ADCReady != SET);
-	while (ADCReady == SET){
-	  if (++(counter) == 25){
-		  counter = 0;
-		  values = 0;
-		  for(uint8_t i = 0; i < (ADC_DMA_BUFFER_SIZE/2); i++){
-			  values += adcDmaBuffer[adcDmaBufferIndex+i];
-		  }
-		  sensor[0].humidity = (values/ADC_DMA_BUFFER_SIZE)*2;
-		  sensor[0].humidity = 100 - ((sensor[0].humidity*100)/4096);
-		  ADCReady = RESET;
-	  }
+	uint32_t humidity_value = 0;
+
+	for(uint8_t i = 0; i < 32; i++){
+	  humidity_value += adc_value[1];
 	}
-	return values;
+	humidity_value /= 32;
+	humidity_value = 100 - ((humidity_value*100)/4096);
+	sensor->humidity = humidity_value;
+	return humidity_value;
 }
 
-void Humidity_Sensor_init(ADC_HandleTypeDef* hadc){
-	HAL_ADCEx_Calibration_Start(hadc);
-	HAL_ADC_Start_DMA(hadc, (uint32_t *)adcDmaBuffer, ADC_DMA_BUFFER_SIZE);
-}
+uint32_t Read_Level_sensor(IrrigationSystem_t *sensor){
+	uint32_t cap_value=0;
 
-void Motor_pwm_init(TIM_HandleTypeDef *htim, uint32_t Channel){
-	HAL_TIM_PWM_Start(htim, Channel);
+	for(uint8_t i=0; i<32; i++){
+	  cap_value += adc_value[0];
+	}
+
+	cap_value /= 32;
+	//cap_value = (((cap_value*1000)/4095)*33)/10;
+	cap_value = (ADC_MAX_LEVEL-cap_value)*100;
+	cap_value = cap_value/(ADC_MAX_LEVEL-ADC_MIN_LEVEL);
+	cap_value = 1 - cap_value/100;
+	sensor->level= cap_value;
+	return cap_value;
 }
 
 void Verify_Humidity(IrrigationSystem_t *sensor, uint8_t min_humidity)
@@ -58,28 +73,21 @@ void Verify_Humidity(IrrigationSystem_t *sensor, uint8_t min_humidity)
 void Turn_On_Motor(uint8_t pwm, TIM_HandleTypeDef *htim, uint32_t Channel)
 {
 	//PWM - depende do tamanho do reservatório
+	pwm = 200-pwm;  //há inversor
 	__HAL_TIM_SET_COMPARE(htim, Channel, pwm);
-	HAL_GPIO_WritePin(LED_Motor_GPIO_Port, LED_Motor_Pin, SET);
+	HAL_GPIO_WritePin(LED_MOTOR_GPIO_Port, LED_MOTOR_Pin, SET);
 
 }
 
 void Turn_Off_Motor(TIM_HandleTypeDef *htim, uint32_t Channel)
 {
-	//PWM = 0;
-	__HAL_TIM_SET_COMPARE(htim, Channel, 0);
-	HAL_GPIO_WritePin(LED_Motor_GPIO_Port, LED_Motor_Pin, RESET);
+	__HAL_TIM_SET_COMPARE(htim, Channel, 200);
+	HAL_GPIO_WritePin(LED_MOTOR_GPIO_Port, LED_MOTOR_Pin, RESET);
 }
 
-void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc)
-{
-	adcDmaBufferIndex=0;
-	ADCReady= SET;
-
-}
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 {
-	adcDmaBufferIndex = (ADC_DMA_BUFFER_SIZE / 2);
-	ADCReady= SET;
-
+	adc_value[0] = adcDmaBuffer[0];
+	adc_value[1] = adcDmaBuffer[1];
 }

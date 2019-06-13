@@ -20,9 +20,9 @@ void RTU_package_IrrigationSystem(package_t *pkg, IrrigationSystem_t  *sensors, 
 	pkg->addr = MODBUS_ADDRESS;
 	pkg->cmd = MODBUS_WRITE;
 	Read_Humidity_sensor(sensors);  //depois mudar para generico
-
-	for(i = 0; i < 1; i++){
-		modbus_write(pkg, sensor_reg, sensors->humidity);
+	Read_Level_sensor(sensors);
+	for(i = 0; i < 2; i++){
+		modbus_write(pkg, sensor_reg, sensors->sensor[i]);
 		pkg->crc = CRC16_2(pkg->package, 6);
 		pkg->data = swap_bytes(pkg->data);
 		pkg->reg = swap_bytes(pkg->reg);

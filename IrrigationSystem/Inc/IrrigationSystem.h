@@ -12,10 +12,14 @@
 #include <stdio.h>
 #include "stm32f1xx_hal.h"
 #include "main.h"
+#define ADC_MAX_LEVEL 1700
+#define ADC_MIN_LEVEL 1400
 
-#define ADC_CHANNELS_PER_SAMPLE 1
-#define ADC_SAMPLES_PER_BUFFER 8
-#define ADC_DMA_BUFFER_SIZE (ADC_SAMPLES_PER_BUFFER*ADC_CHANNELS_PER_SAMPLE)
+ADC_HandleTypeDef hadc1;
+DMA_HandleTypeDef hdma_adc1;
+
+TIM_HandleTypeDef htim1;
+TIM_HandleTypeDef htim2;
 
 typedef union
 {
@@ -27,11 +31,9 @@ typedef union
 }IrrigationSystem_t;
 
 void IrrigationSystem_init();
-void Humidity_Sensor_init(ADC_HandleTypeDef* hadc);
-void Read_sensores(IrrigationSystem_t *sensor);
 uint32_t Read_Humidity_sensor(IrrigationSystem_t *sensor);
+uint32_t Read_Level_sensor(IrrigationSystem_t *sensor);
 void Verify_Humidity(IrrigationSystem_t *sensor, uint8_t min_humidity);
-void Motor_pwm_init(TIM_HandleTypeDef *htim, uint32_t Channel);
 void Turn_On_Motor(uint8_t pwm, TIM_HandleTypeDef *htim, uint32_t Channel);
 void Turn_Off_Motor(TIM_HandleTypeDef *htim, uint32_t Channel);
 

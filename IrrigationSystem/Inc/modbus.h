@@ -21,6 +21,10 @@
 #define RX_BUFFER_SIZE	50
 #define TX_BUFFER_SIZE 50
 
+UART_HandleTypeDef huart1;
+DMA_HandleTypeDef hdma_usart1_rx;
+DMA_HandleTypeDef hdma_usart1_tx;
+
 typedef union{
 	struct{
 		uint8_t addr;

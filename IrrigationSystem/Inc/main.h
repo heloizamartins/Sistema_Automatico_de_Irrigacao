@@ -80,14 +80,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define INTERNAL_LED_Pin GPIO_PIN_13
-#define INTERNAL_LED_GPIO_Port GPIOC
-#define LED_Motor_Pin GPIO_PIN_3
-#define LED_Motor_GPIO_Port GPIOA
-#define DEBUG_1_Pin GPIO_PIN_4
-#define DEBUG_1_GPIO_Port GPIOA
-#define DEBUG_2_Pin GPIO_PIN_5
-#define DEBUG_2_GPIO_Port GPIOA
+#define LED_MOTOR_Pin GPIO_PIN_8
+#define LED_MOTOR_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
