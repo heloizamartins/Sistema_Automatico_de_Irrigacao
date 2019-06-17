@@ -7,13 +7,14 @@
 
 
 #include "IrrigationSystem.h"
+#include "string.h"
 
-uint32_t adcDmaBuffer[2];
-volatile uint32_t adc_value[2];
-volatile uint32_t buffer_adc_humidity[8];
-volatile uint32_t buffer_adc_cap[8];
-volatile uint32_t cap_value = 0;
-volatile uint32_t humidity_value = 0;
+uint32_t adcDmaBuffer[DMA_BUFF_SIZE];
+//volatile uint32_t adc_value[2*8];
+//static uint32_t buffer_adc_humidity[8];
+//static uint32_t buffer_adc_cap[8];
+//volatile uint32_t cap_value = 0;
+//volatile uint32_t humidity_value = 0;
 
 void IrrigationSystem_init(){
 	//Motor PWM Init
@@ -30,15 +31,18 @@ void IrrigationSystem_init(){
 
 	//ADC Init
 	HAL_ADCEx_Calibration_Start(&hadc1);
-	HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adcDmaBuffer, 2);
+	HAL_ADC_Start_DMA(&hadc1, (uint32_t *)adcDmaBuffer, DMA_BUFF_SIZE);
 	HAL_ADC_Start_IT(&hadc1);
+
 
 }
 
 uint32_t Read_Humidity_sensor(IrrigationSystem_t *sensor){
 	uint32_t humidity = 0;
-
-	humidity = humidity_value>>3;
+	for(uint8_t i = 1; i < DMA_BUFF_SIZE; i = i+2){  //pegar os impares
+		humidity+=adcDmaBuffer[i];
+	}
+	humidity = humidity>>3;
 	humidity = 100 - ((humidity*100)/4096);
 	sensor->humidity = humidity;
 	return humidity;
@@ -59,7 +63,10 @@ void Verify_Humidity(IrrigationSystem_t *sensor, uint8_t min_humidity)
 
 uint32_t Read_Level_sensor(IrrigationSystem_t *sensor){
 	uint32_t cap = 0;
-	cap = cap_value>>3;
+	for(uint8_t i = 0; i < DMA_BUFF_SIZE; i = i+2){  //pegar os pares
+		cap+=adcDmaBuffer[i];
+	}
+	cap = cap>>3;
 	cap = (((cap*1000)/4096)*33)/10; //tensão em mV
 	//cap_value = (ADC_MAX_LEVEL-cap_value)*100;
 	//cap_value = (cap_value/(ADC_MAX_LEVEL-ADC_MIN_LEVEL))*100;
@@ -96,15 +103,15 @@ void Turn_Off_Motor()
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 {
-	static uint8_t i=0;
+	//static uint8_t i=0;
 
-	cap_value = 0;
-	humidity_value = 0;
+	//cap_value = 0;
+	//humidity_value = 0;
 
-	adc_value[0] = adcDmaBuffer[0];
-	adc_value[1] = adcDmaBuffer[1];
+	//adc_value[0] = adcDmaBuffer[0];
+	//adc_value[1] = adcDmaBuffer[1];
 
-	buffer_adc_cap[0] = adc_value[0];
+	/*buffer_adc_cap[0] = adc_value[0];
 	buffer_adc_humidity[0] = adc_value[1];
 
 	for(i = 7; i > 0; i--){
@@ -114,6 +121,14 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 		humidity_value += buffer_adc_humidity[i];
 	}
 	cap_value += buffer_adc_cap[0];
-	humidity_value += buffer_adc_humidity[0];
+	humidity_value += buffer_adc_humidity[0];*/
+
+	//cap_value = cap_value - buffer_adc_cap[i] + adc_value[0];
+	//humidity_value = humidity_value - buffer_adc_humidity[i] + adc_value[1];
+	//i++;
+	//buffer_adc_cap[i] = adc_value[0];
+	//buffer_adc_humidity[i] = adc_value[1];
+
+	//i&=0x07;
 
 }

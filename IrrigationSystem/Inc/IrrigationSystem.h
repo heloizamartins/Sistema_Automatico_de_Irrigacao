@@ -12,10 +12,12 @@
 #include <stdio.h>
 #include "stm32f1xx_hal.h"
 #include "main.h"
-#define ADC_MAX_LEVEL 1700
+#define ADC_MAX_LEVEL 1800
 #define ADC_MIN_LEVEL 1400
-#define MIN_WATER_LEVEL 20
-
+#define MIN_WATER_LEVEL 1700
+#define N_CHANNELS 2
+#define N_SAMPLES 8
+#define DMA_BUFF_SIZE  (N_CHANNELS*N_SAMPLES)
 ADC_HandleTypeDef hadc1;
 DMA_HandleTypeDef hdma_adc1;
 
