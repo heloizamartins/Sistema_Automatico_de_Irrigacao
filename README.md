@@ -72,6 +72,8 @@ Um capacitor interdigitado é uma estrutura coplanar que contém múltiplos elet
 
 Para realizar a medida do nível de água, será lido o valor do capacitor, que irá variar de acordo com a quantidade de água e de ar em contato com o capacitor.
 
+Para isso, utilizou-se um circuito RC, apresentado abaixo, onde dois sinais de PWM opostos são gerados pelo mesmo *Timer*, porém com dois canais diferentes, para a carga e a descarga do capacitor com frequência de 200Hz e razão cíclica de 30% (3,5ms de descarga). O carregamento é feito pelo Resistor de 100k e o descarregamento pelo 8.2k. Para configurar o ADC utilizou-se o modo *output compare* do terceiro canal do *Timer*, onde ele irá adquirir a medida a cada 2ms (0,5ms após a descarga do capacitor), garantindo assim a scincronização temporal do efeito RC com a aquisição da medida.
+
 <p align="center">
   <img width="600"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/RC%20CIRCUIT%20CAPACITOR.png">
 </p>
