@@ -64,13 +64,16 @@ O circuito empregado para a aquisição de dados foi um divisor de tensão alime
 
 Para medir o nível d’água optou-se por produzir um sensor capacitivo de placa interdigitada, cujo layout pode ser visto a seguir. 
 
+<p align="center">
+  <img width="80"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Placa_Interdigitada.jpg">
+</p>
+
 Um capacitor interdigitado é uma estrutura coplanar que contém múltiplos eletrodos de pentes interpenetrante, e seu princípio de funcionamento é similar a de um capacitor de placas paralelas. Ao aplicar uma diferença de potencial em cada pente de eletrodos, é gerado um campo elétrico entre o positivo e o negativo dos eletrodos. A partir desse campo, do material e das dimensões da placa, é possível obter o valor da capacitância.
 
 Para realizar a medida do nível de água, será lido o valor do capacitor, que irá variar de acordo com a quantidade de água e de ar em contato com o capacitor.
 
-
 <p align="center">
-  <img width="80"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Placa_Interdigitada.jpg">
+  <img width="600"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/RC%20CIRCUIT%20CAPACITOR.png">
 </p>
 	
 ## Motor <a name=Motor>
