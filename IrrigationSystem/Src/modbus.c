@@ -8,6 +8,7 @@
 #include "modbus.h"
 
 char txDmaBuffer[TX_BUFFER_SIZE];
+char RxDmaBuffer[RX_BUFFER_SIZE];
 __IO ITStatus UartReady = RESET;
 
 void RTU_package_IrrigationSystem(package_t *pkg, IrrigationSystem_t  *sensors, UART_HandleTypeDef *huart)
@@ -67,6 +68,87 @@ void RTU_package_IrrigationSystem(package_t *pkg, IrrigationSystem_t  *sensors, 
 		sensor_reg++;
 		HAL_Delay(500);
 	}
+}
+
+
+uint8_t RTU_Read_package_IrrigationSystem(package_t *pkg, UART_HandleTypeDef *huart)
+{
+	uint16_t sensor_reg = 0x01;		/*Initialization with atuador_0 Address */
+	uint8_t aux;
+	uint8_t data_rx=0;
+	pkg->addr = MODBUS_ADDRESS;
+	pkg->cmd = MODBUS_READ;
+
+	modbus_write(pkg, sensor_reg, 0x001);
+	pkg->crc = CRC16_2(pkg->package, 6);
+	pkg->data = swap_bytes(pkg->data);
+	pkg->reg = swap_bytes(pkg->reg);
+
+	Reset_huart_flag();
+
+	HAL_UART_Transmit_IT(huart, &pkg->addr, sizeof(uint8_t));
+	Wait_transmit_finish();
+	Reset_huart_flag();
+
+	HAL_UART_Transmit_IT(huart, &pkg->cmd, sizeof(uint8_t));
+	Wait_transmit_finish();
+	Reset_huart_flag();
+
+	aux = pkg->reg >> 8;
+	HAL_UART_Transmit_IT(huart, &aux, sizeof(uint8_t));
+	Wait_transmit_finish();
+	Reset_huart_flag();
+
+	HAL_UART_Transmit_IT(huart, (uint8_t*)(&pkg->reg), sizeof(uint8_t));
+	Wait_transmit_finish();
+	Reset_huart_flag();
+
+	aux = pkg->data >> 8;
+	HAL_UART_Transmit_IT(huart, &aux, sizeof(uint8_t));
+	Wait_transmit_finish();
+	Reset_huart_flag();
+
+	HAL_UART_Transmit_IT(huart, (uint8_t*)(&pkg->data), sizeof(uint8_t));
+	Wait_transmit_finish();
+	Reset_huart_flag();
+
+	aux = pkg->crc >> 8;
+	HAL_UART_Transmit_IT(huart, &aux, sizeof(uint8_t));
+	Wait_transmit_finish();
+	Reset_huart_flag();
+
+	HAL_UART_Transmit_IT(huart, (uint8_t*)(&pkg->crc), sizeof(uint8_t));
+	Wait_transmit_finish();
+	Reset_huart_flag();
+
+	//HAL_Delay(500);
+	HAL_UART_Receive_IT(huart, (uint8_t*)RxDmaBuffer, sizeof(uint8_t));
+	Wait_transmit_finish();
+	Reset_huart_flag();
+	HAL_UART_Receive_IT(huart, (uint8_t*)RxDmaBuffer, sizeof(uint8_t));
+	Wait_transmit_finish();
+	Reset_huart_flag();
+	HAL_UART_Receive_IT(huart, (uint8_t*)RxDmaBuffer, sizeof(uint8_t));
+	Wait_transmit_finish();
+	Reset_huart_flag();
+	HAL_UART_Receive_IT(huart, (uint8_t*)RxDmaBuffer, sizeof(uint8_t));
+	Wait_transmit_finish();
+	Reset_huart_flag();
+	HAL_UART_Receive_IT(huart, &aux, sizeof(uint8_t));
+	Wait_transmit_finish();
+	Reset_huart_flag();
+	data_rx = aux << 4;
+	HAL_UART_Receive_IT(huart, &aux, sizeof(uint8_t));
+	Wait_transmit_finish();
+	Reset_huart_flag();
+	data_rx = data_rx | aux;
+	HAL_UART_Receive_IT(huart, (uint8_t*)RxDmaBuffer, sizeof(uint8_t));
+	Wait_transmit_finish();
+	Reset_huart_flag();
+	HAL_UART_Receive_IT(huart, (uint8_t*)RxDmaBuffer, sizeof(uint8_t));
+	Wait_transmit_finish();
+	Reset_huart_flag();
+	return data_rx;
 }
 
 void modbus_write(package_t *pkg, uint16_t sensor_reg, uint16_t data)

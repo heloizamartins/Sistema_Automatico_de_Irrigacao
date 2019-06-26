@@ -66,7 +66,7 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-/*ADC_HandleTypeDef hadc1;
+ADC_HandleTypeDef hadc1;
 DMA_HandleTypeDef hdma_adc1;
 
 TIM_HandleTypeDef htim1;
@@ -74,7 +74,7 @@ TIM_HandleTypeDef htim2;
 
 UART_HandleTypeDef huart1;
 DMA_HandleTypeDef hdma_usart1_rx;
-DMA_HandleTypeDef hdma_usart1_tx;*/
+DMA_HandleTypeDef hdma_usart1_tx;
 
 /* USER CODE BEGIN PV */
 
@@ -135,6 +135,13 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   IrrigationSystem_init();
+  //Turn_On_Motor(180);
+  Turn_Off_Motor();
+  uint8_t min_humidity = 0;
+  min_humidity = RTU_Read_package_IrrigationSystem(&pkg, &huart1);
+  if(min_humidity == 0){
+	  min_humidity = 10;
+  }
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -143,7 +150,7 @@ int main(void)
     {
 	  //send package of MODBUS
 	  RTU_package_IrrigationSystem(&pkg, &IS, &huart1);
-	  Verify_Humidity(&IS, 40);
+	  Verify_Humidity(&IS, min_humidity);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -467,7 +474,17 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(DEBUG_ADC_CC_GPIO_Port, DEBUG_ADC_CC_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LED_MOTOR_GPIO_Port, LED_MOTOR_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin : DEBUG_ADC_CC_Pin */
+  GPIO_InitStruct.Pin = DEBUG_ADC_CC_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  HAL_GPIO_Init(DEBUG_ADC_CC_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : LED_MOTOR_Pin */
   GPIO_InitStruct.Pin = LED_MOTOR_Pin;

@@ -53,10 +53,9 @@ void Verify_Humidity(IrrigationSystem_t *sensor, uint8_t min_humidity)
 	//min_humidity = porcentagem de umidade minima - 0:1:100
 	uint32_t humidity;
 	humidity = Read_Humidity_sensor(sensor);
-	while(humidity < min_humidity){
+	if(humidity < ((uint32_t)min_humidity)){
 		Turn_On_Motor(180);
 		HAL_Delay(10000);
-		Read_Humidity_sensor(sensor);
 	}
 	Turn_Off_Motor();
 }
@@ -103,6 +102,7 @@ void Turn_Off_Motor()
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 {
+	HAL_GPIO_TogglePin(DEBUG_ADC_CC_GPIO_Port, DEBUG_ADC_CC_Pin);
 	//static uint8_t i=0;
 
 	//cap_value = 0;

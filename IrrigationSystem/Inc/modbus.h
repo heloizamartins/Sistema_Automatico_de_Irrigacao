@@ -18,7 +18,7 @@
 #define MODBUS_READ 0x02
 #define MODBUS_REG_SENSOR0 0x05
 
-#define RX_BUFFER_SIZE	50
+#define RX_BUFFER_SIZE	256
 #define TX_BUFFER_SIZE 50
 
 UART_HandleTypeDef huart1;
@@ -37,6 +37,7 @@ typedef union{
 }package_t;
 
 void RTU_package_IrrigationSystem(package_t *pkg, IrrigationSystem_t  *sensors, UART_HandleTypeDef *huart);
+uint8_t RTU_Read_package_IrrigationSystem(package_t *pkg, UART_HandleTypeDef *huart);
 void modbus_write(package_t *pkg, uint16_t sensor_reg, uint16_t data);
 uint16_t CRC16_2(uint8_t *buf, int len);
 uint16_t swap_bytes(uint16_t data);
