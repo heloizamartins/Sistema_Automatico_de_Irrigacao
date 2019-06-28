@@ -99,7 +99,7 @@ Para isso, utilizou-se o protocolo de comunicação [modbus](https://github.com/
 
 * **addr**: endereço do dispositivo que se deseja enviar uma mensagem (0x15) (1 byte)
 
-* **cmd**: comando que se deseja enviar, geralmente escrita (0x01) ou leitura (0x02). (1 byte)
+* **cmd**: comando que se deseja enviar, escrita (0x01) ou leitura (0x02). (1 byte)
 
 * **reg**: qual registrador do dispositivo deseja-se escrever ou ler. (2 bytes)
 
@@ -107,7 +107,7 @@ Para isso, utilizou-se o protocolo de comunicação [modbus](https://github.com/
 
 * **crc**: verificação cíclica de redundância. (2 bytes)
 
-:red_circle: Para o envio dos dados que são de 2 bytes, foi necessário trocar os primeiros dois bytes com os dois últimos, pois o Modbus é do tipo big endian.
+:red_circle: Para o envio dos dados que são de 2 bytes, foi necessário trocar os primeiros dois bytes com os dois últimos, pois o Modbus é do tipo *big endian* e o microcontrolador STM32F103C8 é *little endian*.
 
 Os resultados podem ser visualizados através do aplicativo **MQTT Dash**, disponível para android, onde é possível visualizar: a medida de umidade em porcentagem, de nível de água em milímetro, o estado do motor (*on/off*) e a sinalização do nível baixo de água. Além disso, o usuário pode definir o valor de umidade mínima pelo aplicativo.
 
@@ -129,8 +129,10 @@ Abaixo é possível observar o esquemático utilizado para a alimentação.
 
 # <a name=Resultados></a> Resultados
 
+
+
 <p align="center">
-  <img width="400"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Placa_final_alimentacao_controle.jpg">
+  <img width="800"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Placa_final_alimentacao_controle.jpg">
 </p>
 
 <p align="center">
