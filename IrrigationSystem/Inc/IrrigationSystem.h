@@ -30,7 +30,7 @@ typedef union
 		uint16_t humidity;
 		uint16_t level;
 		uint16_t level_warning;
-		uint16_t teste;
+		uint16_t Motor;
 	};
 	uint16_t sensor[4];
 }IrrigationSystem_t;

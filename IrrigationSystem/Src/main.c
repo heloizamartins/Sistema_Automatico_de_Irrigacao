@@ -146,7 +146,6 @@ int main(void)
 	  min_humidity = RTU_Read_package_IrrigationSystem(&pkg, &huart1, &IS);
 	  if(min_humidity < 10){
 		  min_humidity = 10;
-		  IS.teste = min_humidity;
 	  }
 	  RTU_package_IrrigationSystem(&pkg, &IS, &huart1);
 	  Verify_Humidity(&IS, min_humidity);

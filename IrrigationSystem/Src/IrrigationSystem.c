@@ -55,6 +55,7 @@ void Verify_Humidity(IrrigationSystem_t *sensor, uint16_t min_humidity)
 	humidity = Read_Humidity_sensor(sensor);
 	if(humidity < (uint32_t)min_humidity){
 		if(!sensor->level_warning){
+			sensor->Motor = 1;
 			Turn_On_Motor(180);
 			HAL_Delay(2000);
 		}
@@ -114,32 +115,4 @@ void Turn_Off_Motor()
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 {
 	HAL_GPIO_TogglePin(DEBUG_ADC_CC_GPIO_Port, DEBUG_ADC_CC_Pin);
-	//static uint8_t i=0;
-
-	//cap_value = 0;
-	//humidity_value = 0;
-
-	//adc_value[0] = adcDmaBuffer[0];
-	//adc_value[1] = adcDmaBuffer[1];
-
-	/*buffer_adc_cap[0] = adc_value[0];
-	buffer_adc_humidity[0] = adc_value[1];
-
-	for(i = 7; i > 0; i--){
-		buffer_adc_cap[i] = buffer_adc_cap[i-1]; 			//anda um passo nas amostras anteriores
-		buffer_adc_humidity[i] = buffer_adc_humidity[i-1];
-		cap_value += buffer_adc_cap[i];
-		humidity_value += buffer_adc_humidity[i];
-	}
-	cap_value += buffer_adc_cap[0];
-	humidity_value += buffer_adc_humidity[0];*/
-
-	//cap_value = cap_value - buffer_adc_cap[i] + adc_value[0];
-	//humidity_value = humidity_value - buffer_adc_humidity[i] + adc_value[1];
-	//i++;
-	//buffer_adc_cap[i] = adc_value[0];
-	//buffer_adc_humidity[i] = adc_value[1];
-
-	//i&=0x07;
-
 }
