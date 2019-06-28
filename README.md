@@ -89,7 +89,13 @@ Na saída do microcontrolador utilizou-se o um transistor como inversor garantin
 </p>
 	
 ## Comunicação Wi-Fi <a name=comunicacao>
-Após o condicionamento dos dados dos sensores, estes valores foram enviados ao módulo **WiFi ESP8266 ESP-01**, que enviará os dados dos sensores à Internet através do protocolo MQTT (*Message Queuing Telemetry Transport*). Para isso, utilizou-se o arquivo [´modbus.c´](https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/IrrigationSystem/Src/modbus.c), onde foi enviado o pacote RTU contendo (*addr, cmd, reg, data, crc*) 
+Após o condicionamento dos dados dos sensores, estes valores foram enviados ao módulo **WiFi ESP8266 ESP-01**, que enviará os dados dos sensores à Internet através do protocolo MQTT (*Message Queuing Telemetry Transport*). 
+	
+<p align="center">
+  <img width="600"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/ESP8266_.jpg">
+</p>
+
+Para isso, utilizou-se o protocolo de comunicação [modbus] (https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/IrrigationSystem/Src/modbus.c), onde foi enviado o pacote em formato RTU, *Remote Terminal Unit*, contendo (*addr, cmd, reg, data, crc*) 
 
 * **addr**: endereço do dispositivo que se deseja enviar uma mensagem (0x15) (1 byte)
 
@@ -103,12 +109,7 @@ Após o condicionamento dos dados dos sensores, estes valores foram enviados ao 
 
 :red_circle: Para o envio dos dados que são de 2 bytes, foi necessário trocar os primeiros dois bytes com os dois últimos, pois o Modbus é do tipo big endian.
 
-
-Os resultados podem ser visualizados através do aplicativo **MQTT Dash**, disponível para android, onde é possível visualizar as duas medidas, de umidade e de nível de água.
-
-<p align="center">
-  <img width="600"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/ESP8266_.jpg">
-</p>
+Os resultados podem ser visualizados através do aplicativo **MQTT Dash**, disponível para android, onde é possível visualizar: a medida de umidade em porcentagem, de nível de água em milímetro, o estado do motor (*on/off*) e a sinalização do nível baixo de água. Além disso, o usuário pode definir o valor de umidade mínima pelo aplicativo.
 
 <p align="center">
   <img width="300"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/MQTT_DASH_INTERFACE.png">
