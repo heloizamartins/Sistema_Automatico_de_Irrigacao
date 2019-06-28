@@ -95,7 +95,7 @@ Após o condicionamento dos dados dos sensores, estes valores foram enviados ao 
   <img width="600"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/ESP8266_.jpg">
 </p>
 
-Para isso, utilizou-se o protocolo de comunicação [modbus] (https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/IrrigationSystem/Src/modbus.c), onde foi enviado o pacote em formato RTU, *Remote Terminal Unit*, contendo (*addr, cmd, reg, data, crc*) 
+Para isso, utilizou-se o protocolo de comunicação [modbus](https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/IrrigationSystem/Src/modbus.c), onde foi enviado o pacote em formato RTU, *Remote Terminal Unit*, contendo (*addr, cmd, reg, data, crc*) 
 
 * **addr**: endereço do dispositivo que se deseja enviar uma mensagem (0x15) (1 byte)
 
@@ -130,7 +130,7 @@ Abaixo é possível observar o esquemático utilizado para a alimentação.
 # <a name=Resultados></a> Resultados
 
 <p align="center">
-  <img width="400"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Placa_final.jpg">
+  <img width="400"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Placa_final_alimentacao_controle.jpg">
 </p>
 
 <p align="center">
