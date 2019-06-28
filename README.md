@@ -89,7 +89,7 @@ Na saída do microcontrolador utilizou-se o um transistor como inversor garantin
 </p>
 	
 ## Comunicação Wi-Fi <a name=comunicacao>
-Após o condicionamento dos dados dos sensores, estes valores foram enviados ao módulo **WiFi ESP8266 ESP-01**, que enviará os dados do sensor à Internet através do protocolo MQTT (*Message Queuing Telemetry Transport*). Para isso, utilizou-se o arquivo `modbus.c`, onde foi enviado o pacote RTU contendo (*addr, cmd, reg, data, crc*) 
+Após o condicionamento dos dados dos sensores, estes valores foram enviados ao módulo **WiFi ESP8266 ESP-01**, que enviará os dados dos sensores à Internet através do protocolo MQTT (*Message Queuing Telemetry Transport*). Para isso, utilizou-se o arquivo [´modbus.c´](https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/IrrigationSystem/Src/modbus.c), onde foi enviado o pacote RTU contendo (*addr, cmd, reg, data, crc*) 
 
 * **addr**: endereço do dispositivo que se deseja enviar uma mensagem (0x15) (1 byte)
 
@@ -110,6 +110,11 @@ Os resultados podem ser visualizados através do aplicativo **MQTT Dash**, dispo
   <img width="600"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/ESP8266_.jpg">
 </p>
 
+<p align="center">
+  <img width="300"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/MQTT_DASH_INTERFACE.png">
+</p>
+
+
 ## Alimentação <a name=Alimentacao>
 A alimentação do produto é feita a partir de uma bateria recarregável de lítio-íon. Para o melhor aproveitamento, o circuito já contém um módulo carregador USB de baterias, permitindo, então, que o cliente possa sempre fazer o reuso dessa bateria, apenas carregando-a quando necessário. 
 
@@ -122,5 +127,17 @@ Abaixo é possível observar o esquemático utilizado para a alimentação.
 </p>
 
 # <a name=Resultados></a> Resultados
+
+<p align="center">
+  <img width="400"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Placa_final.jpg">
+</p>
+
+<p align="center">
+  <img width="400"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/MQTT_DASH_LW.png">
+</p>
+<p align="center">
+  <img width="400"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/MQTT_DASH_Motor.png">
+</p>
+
 
 # <a name=referencia></a> Referências
