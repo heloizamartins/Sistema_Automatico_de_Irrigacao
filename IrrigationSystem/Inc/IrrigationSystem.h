@@ -12,9 +12,9 @@
 #include <stdio.h>
 #include "stm32f1xx_hal.h"
 #include "main.h"
-#define ADC_MAX_LEVEL 1800
+#define ADC_MAX_LEVEL 1700
 #define ADC_MIN_LEVEL 1400
-#define MIN_WATER_LEVEL 1700
+#define MIN_WATER_LEVEL 25
 #define N_CHANNELS 2
 #define N_SAMPLES 8
 #define DMA_BUFF_SIZE  (N_CHANNELS*N_SAMPLES)
@@ -30,13 +30,14 @@ typedef union
 		uint16_t humidity;
 		uint16_t level;
 		uint16_t level_warning;
+		uint16_t teste;
 	};
-	uint16_t sensor[3];
+	uint16_t sensor[4];
 }IrrigationSystem_t;
 
 void IrrigationSystem_init();
 uint32_t Read_Humidity_sensor(IrrigationSystem_t *sensor);
-void Verify_Humidity(IrrigationSystem_t *sensor, uint8_t min_humidity);
+void Verify_Humidity(IrrigationSystem_t *sensor, uint16_t min_humidity);
 uint32_t Read_Level_sensor(IrrigationSystem_t *sensor);
 void Verify_Water_Level(IrrigationSystem_t *sensor);
 void Turn_On_Motor(uint8_t pwm);

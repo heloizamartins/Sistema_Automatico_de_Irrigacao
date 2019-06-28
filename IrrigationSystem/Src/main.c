@@ -135,22 +135,22 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   IrrigationSystem_init();
-  //Turn_On_Motor(180);
   Turn_Off_Motor();
-  uint8_t min_humidity = 0;
-  min_humidity = RTU_Read_package_IrrigationSystem(&pkg, &huart1);
-  if(min_humidity == 0){
-	  min_humidity = 10;
-  }
+  volatile uint16_t min_humidity = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
     {
-	  //send package of MODBUS
+	  min_humidity = RTU_Read_package_IrrigationSystem(&pkg, &huart1, &IS);
+	  if(min_humidity < 10){
+		  min_humidity = 10;
+		  IS.teste = min_humidity;
+	  }
 	  RTU_package_IrrigationSystem(&pkg, &IS, &huart1);
 	  Verify_Humidity(&IS, min_humidity);
+	  HAL_Delay(1000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

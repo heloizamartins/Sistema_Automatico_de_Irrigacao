@@ -8,7 +8,7 @@
 
 #include "IrrigationSystem.h"
 #include "string.h"
-
+#include "math.h"
 uint32_t adcDmaBuffer[DMA_BUFF_SIZE];
 //volatile uint32_t adc_value[2*8];
 //static uint32_t buffer_adc_humidity[8];
@@ -48,30 +48,41 @@ uint32_t Read_Humidity_sensor(IrrigationSystem_t *sensor){
 	return humidity;
 }
 
-void Verify_Humidity(IrrigationSystem_t *sensor, uint8_t min_humidity)
+void Verify_Humidity(IrrigationSystem_t *sensor, uint16_t min_humidity)
 {
 	//min_humidity = porcentagem de umidade minima - 0:1:100
-	uint32_t humidity;
+	uint32_t humidity = 0;
 	humidity = Read_Humidity_sensor(sensor);
-	if(humidity < ((uint32_t)min_humidity)){
-		Turn_On_Motor(180);
-		HAL_Delay(10000);
+	if(humidity < (uint32_t)min_humidity){
+		if(!sensor->level_warning){
+			Turn_On_Motor(180);
+			HAL_Delay(2000);
+		}
 	}
 	Turn_Off_Motor();
 }
 
 uint32_t Read_Level_sensor(IrrigationSystem_t *sensor){
-	uint32_t cap = 0;
+	uint32_t level = 0;
 	for(uint8_t i = 0; i < DMA_BUFF_SIZE; i = i+2){  //pegar os pares
-		cap+=adcDmaBuffer[i];
+		level+=adcDmaBuffer[i];
 	}
-	cap = cap>>3;
-	cap = (((cap*1000)/4096)*33)/10; //tensão em mV
+	level = level>>3;
+	level = (((level*1000)/4096)*33)/10; //tensão em mV
+
+	if(level > 2200){
+		level = (24*level) - 52861;
+		level = rint(level/100);
+	}else
+		level = 10;
+
+	//level = (13*level) - 21846;
+	//level = rint(level/100);
 	//cap_value = (ADC_MAX_LEVEL-cap_value)*100;
 	//cap_value = (cap_value/(ADC_MAX_LEVEL-ADC_MIN_LEVEL))*100;
 	//cap_value = 1 - cap_value/100;
-	sensor->level= cap;
-	return cap;
+	sensor->level= level;
+	return level;
 }
 
 void Verify_Water_Level(IrrigationSystem_t *sensor)
