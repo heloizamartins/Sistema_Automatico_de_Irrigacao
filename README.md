@@ -33,12 +33,12 @@ Indicador de Nível de água      | x    		|                    		|				|x
 Reservatório de água     	| x    		| x         			| x				|x
 Controle da quantidade de água 	| x           	| x          			| x				|x
 Sistema de aeração     		| x           	|        			| 				|
-Alimentação     	 	| não informado | Bateria 9V        		| 220V CA			|Bateria
+Alimentação     	 	| não informado | Bateria 9V        		| 220V CA			|Bateria 3,7V
 Configuração de tempo   	|         	| x    				| x				|x
 Distribuição de água   		| pavio        	| Gotejamento/gravidade 	| injeção direta/vazão e pressão|gotejamento
-Programa para controle		|         	| pré-definido pelo usuário 	| menu intuitivo		|celular
+Programa para controle		|         	| pré-definido pelo usuário 	| menu intuitivo		|Qualquer dispositivo com conexão Wi-Fi
 Autonomia 			|        	| 20 plantas por 40 dias 	| 5 a 90 m^3/h			|30 dias
-Sinalização 			|         	| em funcionamento/bateria baixa| entrada digital/12 sensores	| em funcionamento/ nível da água
+Sinalização 			|         	| em funcionamento/bateria baixa| entrada digital/12 sensores	| Motor/ nível da água
 Sistema de comunicação 		|   		|    				|				| Wi-Fi 
 
 Além desses produtos, também foram encontrados alguns projetos feitos para uso pessoal, utilizando o microcontrolador Arduino. No entanto, a maioria não tinha um reservatório de água, nem um meio para mandar água automaticamente para a planta, apenas os dados do sensor de umidade eram mandados para um dispositivo, para que a irrigação fosse feita manualmente.
@@ -54,13 +54,13 @@ Para a verificação da umidade do solo, utilizou-se o sensor de umidade do solo
   <img width="400"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/sensor-de-umidade-do-solo-higrmetro.jpg">
 </p>
 
-O circuito empregado para a aquisição de dados foi um divisor de tensão alimentado a 3.3V, representado pela Figura abaixo. Os dois pinos do sensor estão em série com o resistor de 10㏀, e em paralelo com o capacitor de 10nF, que tem a função de remover os picos indesejados nos trilhos de energia. A saída do divisor é conectada ao conversor AD do microcontrolador para ler o seu valor de tensão e calcular a resistência do sensor. Essa irá ser máxima e muito maior que 10㏀, quando o solo está seco, assim, a saída irá ter o mesmo valor de alimentação (efeito pull-up do resistor de 10㏀). Caso contrário, a saída terá o valor referente à queda de tensão na eletrodos do sensor, que será um valor bem menor.
+O circuito empregado para a aquisição de dados foi um divisor de tensão alimentado a 3V3, representado pela Figura abaixo. Os dois pinos do sensor estão em série com o resistor de 10㏀, e em paralelo com o capacitor de 10nF, que tem a função de remover os picos indesejados nos trilhos de energia. A saída do divisor é conectada ao conversor AD do microcontrolador STM32F103C8 para ler o seu valor de tensão e calcular a resistência do sensor. Essa irá ser máxima e muito maior que 10㏀, quando o solo está seco, assim, a saída irá ter o mesmo valor de alimentação (efeito pull-up do resistor de 10㏀). Caso contrário, a saída terá o valor referente à queda de tensão na eletrodos do sensor, que será um valor bem menor.
 
 <p align="center">
   <img width="400"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/sensor_Umidade_circuito.jpg">
 </p>
 
-A partir dos dados obtidos com o sensor de umidade foi gerado o gráfico da Figura abaixo. Esse gráfico representa a umidade da planta em relação ao tempo, a partir do momento em houve a irrigação. Para obter esse valores, optou-se pelo uso da planta Avenca, devido a necessidade de irriga-lá todos os dias.
+A partir dos dados obtidos com o sensor de umidade foi gerado o gráfico da Figura abaixo, representando a umidade da planta em relação ao tempo, a partir do momento em que houve a irrigação. Para obter esse valores, optou-se pelo uso da planta Avenca, devido a necessidade de irriga-lá todos os dias.
 
 
 <p align="center">
@@ -68,9 +68,9 @@ A partir dos dados obtidos com o sensor de umidade foi gerado o gráfico da Figu
 </p>
 
 
-Os dados do sensor de umidade foram adquiridos pelo ADC do microcontrolador, assim como os dados do sensor de nível, que será explicado em seguida. Como há certa variação nas leituras, foi implementado um sistema que calcula a média a partir de 16 amostras obtidas.
+Os dados do sensor de umidade foram adquiridos pelo ADC do microcontrolador, assim como os dados do sensor de nível, que será explicado em seguida. Como há certa variação nas leituras, foi implementado um sistema que calcula a média a partir de 8 amostras obtidas.
 
-Esses dados obtidos pelo sensor de umidade foram tratados em porcentagem, dado que não existe uma unidade para a umidade, e sim uma relação de quantidade, ou seja, o quanto que determinado solo está úmido. Optou-se também por trabalhar dessa maneira, pois facilita o entendimento do usuário em relação à necessidade de água do solo. Além disso, o usuário também pode definir uma umidade mínima que o solo deve estar, caso esse valor seja maior do que o sensor está medindo, a planta será irrigada, até chegar no valor determinado. Caso o valor escolhido pelo usuário seja menor do que 10%, o sistema irá setar esse valor para 10%.
+Esses dados obtidos pelo sensor de umidade foram tratados em porcentagem, dado que não existe uma unidade para a umidade, e sim uma relação de quantidade, ou seja, o quanto que um determinado solo está úmido. Decidiu-se também por trabalhar dessa forma, pois facilita o entendimento do usuário em relação à necessidade de água do solo. Além disso, o usuário pode definir uma umidade mínima que o solo deve estar, caso esse valor seja maior do que o sensor está medindo, a planta será irrigada, até chegar no valor determinado. Caso o valor escolhido pelo usuário seja menor do que 10%, o sistema irá setar esse valor para 10%.
 
 
 ## Sensor de Nível de Água <a name=Sensor-de-Nivel-de-agua>
@@ -83,7 +83,7 @@ Para medir o nível d’água optou-se por produzir um sensor capacitivo de plac
 
 Um capacitor interdigitado é uma estrutura coplanar que contém múltiplos eletrodos de pentes interpenetrante, e seu princípio de funcionamento é similar a de um capacitor de placas paralelas. Ao aplicar uma diferença de potencial em cada pente de eletrodos, é gerado um campo elétrico entre o positivo e o negativo dos eletrodos. A partir desse campo, do material e das dimensões da placa, é possível obter o valor da capacitância.
 
-Para realizar a medida do nível de água, é lido o valor do capacitor, que irá variar de acordo com a quantidade de água e de ar em contato com o capacitor.
+Para realizar a medida do nível de água, é lido o valor de tensão nos terminais do capacitor, que irá variar de acordo com a quantidade de água e de ar em contato com o capacitor.
 
 Para isso, utilizou-se um circuito RC, apresentado abaixo, onde dois sinais de PWM opostos são gerados pelo mesmo *Timer*, porém com dois canais diferentes, para a carga e a descarga do capacitor com frequência de 200Hz e razão cíclica de 30% (3,5ms de descarga). O carregamento é feito pelo Resistor de 100k e o descarregamento pelo 8.2M. Para configurar o ADC utilizou-se o modo *output compare* do terceiro canal do *Timer*, onde ele irá adquirir a medida a cada 2ms (0,5ms após a descarga do capacitor), garantindo assim a sincronização temporal do efeito RC com a aquisição da medida.
 
@@ -91,25 +91,18 @@ Para isso, utilizou-se um circuito RC, apresentado abaixo, onde dois sinais de P
   <img width="600"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/RC%20CIRCUIT%20CAPACITOR.png">
 </p>
 	
-Assim como o sensor de umidade, os dados do sensor de nível foram lidos pelo ADC, e também foi realizado uma média com 16 amostras obtidas. A Figura a seguir mostra a carga e descarga do capacitor, assim como o ADC utilizado para medir esses valores.
-
-Como o uso do ADC foi feito com DMA, não é possível ver todos os pontos exatos em que o valor está sendo lido, apenas na última amostra, que é quando o ADC passa a ler os valores do sensor de umidade, na Figura abaixo é possível ver que essa mudança está sendo feita em aproximadamente 500 us a partir do início da descarga do capacitor. A partir desse tempo definido, e do valor que é lido pelo ADC, é possível obter o valor de capacitância do capacitor naquele momento. E é a partir desse valor que foi feita medida do nível de água.
-
-<p align="center">
-  <img width="300"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/TEK0003.JPG">
-</p>
-
+Assim como o sensor de umidade, foi realizada uma média com 8 amostras obtidas. A Figura a seguir mostra a carga e descarga do capacitor, assim como o instante que foi feita a aquisição do valor de tensão (500us após o início da descarga do capacitor).
 
 <p align="center">
   <img width="300"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/TEK0001.JPG">
 </p>
 
-Como o objetivo de se utilizar o sensor capacitivo era o de medir o nível de água no reservatório do sistema, a capacitância medida foi convertida em milímetros. O gráfico a seguir mostra a variância da altura da água no reservatório em relação ao valor de ADC lido no mesmo momento. A partir desses pontos, gerou-se uma equação, para converter todos os valores lidos em mm. Dessa maneira, o usuário pode saber aproximadamente qual a quantidade de água que ainda há no seu reservatório. 
+Como o objetivo de se utilizar o sensor capacitivo era o de medir o nível de água no reservatório do sistema, a tensão medida foi convertida em milímetros. O gráfico a seguir mostra a variância da altura da água no reservatório em relação ao valor de ADC lido no mesmo instante. A partir desses pontos, gerou-se uma equação, para converter todos os valores lidos em mm. Dessa maneira, o usuário pode saber aproximadamente qual a quantidade de água que ainda há no seu reservatório. 
 
-Além disso, também foi implementada uma sinalização que avisa ao usuário quando não há mais água o suficiente no reservatório, quando o sinal está em 1, significa que há pouca ou nenhuma água no recipiente, e quando o sinal está em 0, significa que ainda há água o suficiente para a irrigação.
+Além disso, também foi implementada uma sinalização que avisa ao usuário quando não há mais água o suficiente no reservatório, sendo que, quando o sinal está em 1, significa que há pouca ou nenhuma água no recipiente, e quando o sinal está em 0, significa que ainda há água o suficiente para a irrigação.
 
 <p align="center">
-  <img width="600"  src="">
+  <img width="600"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/tensaoxNivel.png">
 </p>
 
 
