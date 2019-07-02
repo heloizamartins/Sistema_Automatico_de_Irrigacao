@@ -51,7 +51,7 @@ Para a verificação da umidade do solo, utilizou-se o sensor de umidade do solo
 
 
 <p align="center">
-  <img width="400"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/sensor-de-umidade-do-solo-higrmetro.jpg">
+  <img width="300"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/sensor-de-umidade-do-solo-higrmetro.jpg">
 </p>
 
 O circuito empregado para a aquisição de dados foi um divisor de tensão alimentado a 3V3, representado pela Figura abaixo. Os dois pinos do sensor estão em série com o resistor de 10㏀, e em paralelo com o capacitor de 10nF, que tem a função de remover os picos indesejados nos trilhos de energia. A saída do divisor é conectada ao conversor AD do microcontrolador STM32F103C8 para ler o seu valor de tensão e calcular a resistência do sensor. Essa irá ser máxima e muito maior que 10㏀, quando o solo está seco, assim, a saída irá ter o mesmo valor de alimentação (efeito pull-up do resistor de 10㏀). Caso contrário, a saída terá o valor referente à queda de tensão na eletrodos do sensor, que será um valor bem menor.
@@ -102,7 +102,7 @@ Como o objetivo de se utilizar o sensor capacitivo era o de medir o nível de á
 Além disso, também foi implementada uma sinalização que avisa ao usuário quando não há mais água o suficiente no reservatório, sendo que, quando o sinal está em 1, significa que há pouca ou nenhuma água no recipiente, e quando o sinal está em 0, significa que ainda há água o suficiente para a irrigação.
 
 <p align="center">
-  <img width="600"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/tensaoxNivel.png">
+  <img width="500"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/tensaoxNivel.png">
 </p>
 
 
