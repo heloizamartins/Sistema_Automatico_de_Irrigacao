@@ -53,12 +53,10 @@ void Verify_Humidity(IrrigationSystem_t *sensor, uint16_t min_humidity)
 	//min_humidity = porcentagem de umidade minima - 0:1:100
 	uint32_t humidity = 0;
 	humidity = Read_Humidity_sensor(sensor);
-	if(humidity < (uint32_t)min_humidity){
-		if(!sensor->level_warning){
-			sensor->Motor = 1;
-			Turn_On_Motor(180);
-			HAL_Delay(2000);
-		}
+	if((humidity < (uint32_t)min_humidity) && (!sensor->level_warning)){
+		sensor->Motor = 1;
+		Turn_On_Motor(180);
+		HAL_Delay(2000);
 	}
 	Turn_Off_Motor();
 }

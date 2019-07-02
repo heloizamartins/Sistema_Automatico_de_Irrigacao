@@ -80,7 +80,6 @@ uint16_t RTU_Read_package_IrrigationSystem(package_t *pkg, UART_HandleTypeDef *h
 	HAL_UART_Receive(huart, (uint8_t*)RxDmaBuffer, 8, 1000);
 
 	data_rx = RxDmaBuffer[5];
-	//sensors->teste = data_rx;
 
 	return data_rx;
 }

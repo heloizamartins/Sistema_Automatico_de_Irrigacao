@@ -149,7 +149,8 @@ int main(void)
 	  }
 	  RTU_package_IrrigationSystem(&pkg, &IS, &huart1);
 	  Verify_Humidity(&IS, min_humidity);
-	  HAL_Delay(1000);
+	  RTU_package_IrrigationSystem(&pkg, &IS, &huart1);
+	  HAL_Delay(2000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
