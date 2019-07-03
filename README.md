@@ -65,7 +65,7 @@ O circuito empregado para a aquisição de dados foi um divisor de tensão alime
 Foram feitos testes deste sensor com a planta Avenca e os dados foram adquiridos num período de 6 horas com um intervalo de uma hora entre cada aquisição. Então, gerou-se o gráfico da Figura abaixo, sendo que o primeiro dado foi obtido logo após a primeira e única irrigação que houve naquele dia.
 
 <p align="center">
-  <img width="400"  src="">
+  <img width="400"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/UmidadexTempo.png">
 </p>
 
 
