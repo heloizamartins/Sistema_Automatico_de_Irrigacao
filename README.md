@@ -176,3 +176,23 @@ Abaixo é possível observar o esquemático utilizado para a alimentação.
 
 
 # <a name=referencia></a> Referências
+
+CHETPATTANANONDH, Kanadit et al. A self-calibration water level measurement using an interdigital capacitive sensor. **Elsevier: Sensors and Actuators A: Physical**. Thailand, p. 175-182. 2014.
+
+CHIRAG PARMAR. **Know Your Sensor — YL38 Soil Hygrometer**. Disponível em: <https://medium.com/@chirag.parmar/know-your-sensor-yl38-soil-hygrometer-fceca860faac>. Acesso em: 03 jul. 2019.
+
+CLABER OASIS. **Claber 8053 Oasis 4-Programs/20 Plants Garden Automatic Drip Watering System**. Disponível em: <https://www.amazon.com/Claber-8053-4-Programs-Automatic-Watering/dp/B000U5YFR4/ref=as_li_ss_tl?s=lawn-garden&ie=UTF8&qid=1512597471&sr=1-4&keywords=indoor+watering+system&linkCode=sl1&tag=culinaryherb-20&linkId=ab3f02bb2b0c518f48dbd2a272eaca80>. Acesso em: 03 jul. 2019.
+
+HIDROSENSE .**HIDROFERTI - CONTROLADOR DE FERTIRRIGAÇÃO POR INJEÇÃO DIRETA**. Disponível em: <https://www.hidrosense.com.br/controle-de-irrigacao/hidroferti-s-controlador-de-fertirrigacao-por-injecao-direta>. Acesso em: 03 jul. 2019.
+
+ **Lechuza**. Disponível em: <https://www.lechuza.us/home/>. Acesso em: 03 jul. 2019.
+
+SHENZHEN ANXINKE TECHNOLOGY. **ESP-01 WiFi Module**. Disponível em: <http://www.microchip.ua/wireless/esp01.pdf>. Acesso em: 03 jul. 2019
+
+**Reference Manual**. 2018. Disponível em: <https://www.st.com/content/st_com/en.html>. Acesso em: 03 jul. 2019.
+
+STARKE, Renan. **Gateway MODBUS MQTT usando ESP8266**. 2019. Disponível em: <https://github.com/xtarke/mqtt_modbus>. Acesso em: 03 jul. 2019.
+
+TEXAS INSTRUMENTS. **µA7800 SERIES. POSITIVE-VOLTAGE REGULATORS**. Disponível em: <https://www.sparkfun.com/datasheets/Components/LM7805.pdf>. Acesso em: 03 jul. 2019.
+
+TEXAS INSTRUMENTS. **LM317 3-Terminal Adjustable Regulator**. Disponível em: <http://www.ti.com/lit/ds/slvs044x/slvs044x.pdf>. Acesso em: 03 jul. 2019.
