@@ -1,10 +1,10 @@
 # Sistema Automático de Irrigação - nome do produto
 
 ## Sumário
-1. [Nome do Produto](#Nome-do-Produto)
+1. [SmartPot](#Nome-do-Produto)
 	* [Descrição do Produto](#Descricao-do-Produto)
 	* [Produtos Existentes](#Produtos-Existentes)
-2. [Materiais](#Materiais)
+2. [Desenvolvimento do Produto](#desenvolvimento)
 	* [Sensor de Umidade](#Sensor-de-Umidade)
 	* [Sensor de Nível de Água](#Sensor-de-Nivel-de-agua)
 	* [Motor](#Motor)
@@ -18,6 +18,7 @@
 # <a name=Nome-do-Produto></a> Nome do Produto
 ## Descrição do Produto <a name=Descricao-do-Produto>
 Muitas pessoas, hoje em dia, tem plantas nas suas residências, porém não providenciam cuidado necessário a elas, como por exemplo não irrigar no tempo adequado. Por isso, este produto tem como objetivo  possuir um sistema automático para o controle de irrigação de plantas, tanto com a quantidade e a distribuição de água como o horário em que será fornecida. Isso tudo será automático, pré-definido pelo próprio usuário, de acordo com a planta monitorada, utilizando comunicação wireless.
+
 O produto conterá um sensor de umidade de solo, que fornecerá informações sobre o estado da planta e, a partir dessas, tomar a decisão de irrigá-la ou não. Além disso, possuirá um reservatório de água, o qual possuirá um sensor de nível, que mandará um aviso ao usuário quando a água estiver acabando. 
 
 ![alt text](https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Diagrama%20de%20Blocos.jpg)
@@ -44,33 +45,31 @@ Sistema de comunicação 		|   		|    				|				| Wi-Fi
 Além desses produtos, também foram encontrados alguns projetos feitos para uso pessoal, utilizando o microcontrolador Arduino. No entanto, a maioria não tinha um reservatório de água, nem um meio para mandar água automaticamente para a planta, apenas os dados do sensor de umidade eram mandados para um dispositivo, para que a irrigação fosse feita manualmente.
 
 
-# <a name=Materiais></a> Materiais
+# <a name=desenvolvimento></a> Desenvolvimento do Produto
+
 ## Sensor de Umidade <a name=Sensor-de-Umidade>
 	
-Para a verificação da umidade do solo, utilizou-se o sensor de umidade do solo Higrômetro HL-69, Figura abaixo. O princípio de funcionamento deste sensor é da seguinte forma, através da aplicação de uma determinada corrente nos seus eletrodos existentes nas hastes, é possível estimar quão úmido ou seco o solo está, devido a condutividade do solo. Sendo que, quando o solo estiver úmido há uma condutividade maior, que resulta num fluxo maior de corrente entre os dois eletrodos. E quando o solo estiver seco, ocorrerá o oposto, pouca corrente passará. 
+Para a verificação da umidade do solo, utilizou-se o sensor de umidade do solo Higrômetro HL-69 apresentado na Figura abaixo. O princípio de funcionamento deste sensor é baseado na aplicação de uma determinada corrente nos seus eletrodos existentes nas hastes, assim é possível estimar quão úmido o solo está, devido a condutividade do mesmo. Sendo que, quando o substrato estiver úmido há uma condutividade maior, que resulta num fluxo maior de corrente entre os dois eletrodos, e quando estiver seco, ocorrerá o oposto, ou seja  há uma redução neste fluxo. 
 
 
 <p align="center">
   <img width="300"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/sensor-de-umidade-do-solo-higrmetro.jpg">
 </p>
 
-O circuito empregado para a aquisição de dados foi um divisor de tensão alimentado a 3V3, representado pela Figura abaixo. Os dois pinos do sensor estão em série com o resistor de 10㏀, e em paralelo com o capacitor de 10nF, que tem a função de remover os picos indesejados nos trilhos de energia. A saída do divisor é conectada ao conversor AD do microcontrolador STM32F103C8 para ler o seu valor de tensão e calcular a resistência do sensor. Essa irá ser máxima e muito maior que 10㏀, quando o solo está seco, assim, a saída irá ter o mesmo valor de alimentação (efeito pull-up do resistor de 10㏀). Caso contrário, a saída terá o valor referente à queda de tensão na eletrodos do sensor, que será um valor bem menor.
+O circuito empregado para a aquisição de dados foi um divisor de tensão alimentado a 3V3, representado pela Figura abaixo. Os dois pinos do sensor estão em série com o resistor de 10㏀, e em paralelo com o capacitor de 10nF, que tem a função de remover os picos indesejados nos trilhos de energia. A saída do divisor é conectada ao conversor AD do microcontrolador STM32F103C8 para ler o seu valor de tensão que é proporcional à resistência do sensor. Essa irá ser máxima e muito maior que 10㏀, quando o solo está seco, assim, a saída irá ter o mesmo valor de alimentação (efeito pull-up do resistor de 10㏀). Caso contrário, a saída terá o valor referente à queda de tensão na eletrodos do sensor, que será um valor bem menor.
 
 <p align="center">
   <img width="400"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/sensor_Umidade_circuito.jpg">
 </p>
 
-A partir dos dados obtidos com o sensor de umidade foi gerado o gráfico da Figura abaixo, representando a umidade da planta em relação ao tempo, a partir do momento em que houve a irrigação. Para obter esse valores, optou-se pelo uso da planta Avenca, devido a necessidade de irriga-lá todos os dias.
-
+Foram feitos testes deste sensor com a planta Avenca e os dados foram adquiridos num período de 6 horas com um intervalo de uma hora entre cada aquisição. Então, gerou-se o gráfico da Figura abaixo, sendo que o primeiro dado foi obtido logo após a primeira e única irrigação que houve naquele dia.
 
 <p align="center">
   <img width="400"  src="">
 </p>
 
 
-Os dados do sensor de umidade foram adquiridos pelo ADC do microcontrolador, assim como os dados do sensor de nível, que será explicado em seguida. Como há certa variação nas leituras, foi implementado um sistema que calcula a média a partir de 8 amostras obtidas.
-
-Esses dados obtidos pelo sensor de umidade foram tratados em porcentagem, dado que não existe uma unidade para a umidade, e sim uma relação de quantidade, ou seja, o quanto que um determinado solo está úmido. Decidiu-se também por trabalhar dessa forma, pois facilita o entendimento do usuário em relação à necessidade de água do solo. Além disso, o usuário pode definir uma umidade mínima que o solo deve estar, caso esse valor seja maior do que o sensor está medindo, a planta será irrigada, até chegar no valor determinado. Caso o valor escolhido pelo usuário seja menor do que 10%, o sistema irá setar esse valor para 10%.
+A leitura destes dados foi realizada pelo ADC do microcontrolador, assim como os dados do sensor de nível, que será explicado em seguida. Devido a variação dos valores, foi implementado um sistema que calcula a média a partir de 8 amostras obtidas, e em seguida, para facilitar o entendimento do usuário, converteu-se esse valor para porcentagem, dado que não existe uma unidade para a umidade, e sim uma relação de quantidade, ou seja, o quanto que um determinado solo está úmido. Além disso, o usuário pode definir uma umidade mínima que o solo deve estar, caso esse valor seja maior do que o sensor está medindo, a planta será irrigada, até chegar no valor definido. O sistema estabelece uma porcentagem mínima de 10% caso nenhum valor seja determinado ou este seja menor que 10%. 
 
 
 ## Sensor de Nível de Água <a name=Sensor-de-Nivel-de-agua>
