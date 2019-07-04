@@ -11,7 +11,9 @@
 	* [Comunicação Wi-Fi](#comunicacao)
 	* [Alimentação](#Alimentacao)
 3. [Resultados](#Resultados)
-4. [Referências](#referencia)
+4. [Considerações Finais](#consideracoes)
+5. [Referências](#referencia)
+
 
 ### 
 
@@ -203,6 +205,8 @@ Para calcular o tempo de funcionamento do sistema apenas com o uso da bateria re
 <p align="center">
   <img width="400"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/TensaoxTempo.jpg">
 </p>
+
+# <a name=consideracoes></a> Considerações Finais
 
 # <a name=referencia></a> Referências
 
