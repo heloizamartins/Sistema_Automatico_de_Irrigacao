@@ -47,6 +47,13 @@ Além desses produtos, também foram encontrados alguns projetos feitos para uso
 
 # <a name=desenvolvimento></a> Desenvolvimento do Produto
 
+Para a implementação deste produto, utilizou-se um sensor de umidade, uma bomba d'água submersível,  um sensor capacitivo interdigitado, um módulo de comunicação Wi-Fi, um módulo de alimentação e o microcontrolador  STM32F103C8, Figura 2, que foi utilizado para realizar a programação do sistema.
+
+<p align="center">
+  <img width="300"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/blue-pill-stm32duino.jpg">
+</p>
+
+
 ## Sensor de Umidade <a name=Sensor-de-Umidade>
 	
 Para a verificação da umidade do solo, utilizou-se o sensor de umidade do solo Higrômetro HL-69 apresentado na Figura 3. O princípio de funcionamento deste sensor é baseado na aplicação de uma determinada corrente nos seus eletrodos existentes nas hastes, assim é possível estimar quão úmido o solo está, devido a condutividade do mesmo. Sendo que, quando o substrato estiver úmido há uma condutividade maior, que resulta num fluxo maior de corrente entre os dois eletrodos, e quando estiver seco, ocorrerá o oposto, ou seja  há uma redução neste fluxo. 
@@ -104,7 +111,7 @@ Além disso, implementou-se uma sinalização que avisa ao usuário quando não 
 
 ## Motor <a name=Motor>
 	
-O motor escolhido para fazer parte do produto foi uma bomba d'água submersível, de 3,6 V com capacidade de 120L/h, que pode ser vista na Figura 12. O acionamento do motor é feito por um regulador de corrente, LM317, controlado por tensão, limitando uma corrente máxima necessária para o seu funcionamento.  A tensão de entrada é adquirida por um sinal de PWM gerado pelo microcontrolador, o qual modifica a velocidade do motor de acordo com o *duty cycle* definido. 
+O motor escolhido para fazer parte do produto foi uma bomba d'água submersível, de 3,6 V com capacidade de 120L/h, que pode ser vista na Figura 12. O acionamento do motor é feito por um regulador de corrente, [LM317](http://www.ti.com/lit/ds/slvs044x/slvs044x.pdf), controlado por tensão, limitando uma corrente máxima necessária para o seu funcionamento.  A tensão de entrada é adquirida por um sinal de PWM gerado pelo microcontrolador, o qual modifica a velocidade do motor de acordo com o *duty cycle* definido. 
 
 Na saída do microcontrolador utilizou-se o um transistor como inversor garantindo uma tensão de 5V quando está em alto em vez de 3.3V, tensão necessária para o funcionamento do circuito, apresentado na Figura 11. O amplificador TL071 opera como seguidor de tensão, o qual tem a finalidade de isolar as variações do sinal de PWM do transistor BC337, tendo assim mais segurança de que não haverá interferência no circuito e o transistor BC337 atua como amplificador de corrente.
 
@@ -112,12 +119,10 @@ Na saída do microcontrolador utilizou-se o um transistor como inversor garantin
   <img width="800"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Motor.jpg">
 </p>
 
-O acionamento do motor depende da umidade do solo e da umidade mínima que o solo deve sempre estar, ou seja, se a umidade do solo estiver menor do que 10%, ou menor do que a umidade que foi definida pelo usuário (sendo este um valor maior do que 10%), o motor irá ligar, e irriga-rá a planta até que o valor de umidade lido seja maior do valor mínimo configurado.
-
-No entanto, esse motor só irá ser acionado, se a sinalização do nível de água estiver em 0, ou seja, se tiver água o suficiente no reservatório.
+O acionamento do motor depende da sinalização do nível d'água (nível baixo), da umidade do solo e da umidade mínima na qual deve sempre estar, ou seja, se a umidade estiver menor do que 10%, ou menor da qual foi definida pelo usuário (sendo este um valor maior do que 10%), o motor ligará, e irá irrigar a planta até que o valor de umidade lido seja maior do valor mínimo configurado.
 	
 ## Comunicação Wi-Fi <a name=comunicacao>
-Após o condicionamento dos dados dos sensores, estes valores foram enviados ao módulo **WiFi ESP8266 ESP-01**, que enviará os dados dos sensores à Internet através do protocolo MQTT (*Message Queuing Telemetry Transport*). 
+Após o condicionamento dos dados dos sensores, estes valores foram enviados ao módulo [WiFi ESP8266 ESP-01](http://www.microchip.ua/wireless/esp01.pdf), Figura 14, que os enviará  à Internet através do protocolo MQTT (*Message Queuing Telemetry Transport*). 
 	
 <p align="center">
   <img width="600"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/ESP8266_.jpg">
@@ -137,7 +142,7 @@ Para isso, utilizou-se o protocolo de comunicação [modbus](https://github.com/
 
 :red_circle: Para o envio dos dados que são de 2 bytes, foi necessário trocar os primeiros dois bytes com os dois últimos, pois o Modbus é do tipo *big endian* e o microcontrolador STM32F103C8 é *little endian*.
 
-Os resultados podem ser visualizados através do aplicativo **MQTT Dash**, disponível para android, onde é possível visualizar: a medida de umidade em porcentagem, de nível de água em milímetro, o estado do motor (*on/off*) e a sinalização do nível de água. Além disso, o usuário pode definir o valor de umidade mínima pelo aplicativo.
+Os resultados são apresentados pelo aplicativo **MQTT Dash**, disponível para android, Figura 15, onde é possível visualizar: a medida de umidade em porcentagem, de nível de água em milímetro, o estado do motor (*on/off*) e a sinalização do nível de água. Além disso, o usuário pode definir o valor de umidade mínima pelo aplicativo, como mencionado anteriormente.
 
 <p align="center">
   <img width="300"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/MQTT_DASH_INTERFACE.png">
@@ -147,9 +152,9 @@ Os resultados podem ser visualizados através do aplicativo **MQTT Dash**, dispo
 ## Alimentação <a name=Alimentacao>
 A alimentação do produto é feita a partir de uma bateria recarregável de lítio-íon. Para o melhor aproveitamento, o circuito já contém um módulo carregador USB de baterias, permitindo que o cliente possa sempre fazer o reuso dessa bateria, apenas carregando-a quando necessário. 
 
-Além disso, para a alimentação de alguns circuitos utilizados era necessário tensões de 5V e 9V. Por isso, a placa de alimentação foi composta por um boost, responsável por elevar a tensão fornecida pela bateria até 9V. Essa é tensão que alimenta o circuito do motor, e para os outros circuitos, utilizou-se um regulador de tensão 7805, que fornece como saída 5V, que irá alimentar o microcontrolador, o qual será o responsável por fornecer a tensão necessário para os outros circuitos.
+Além disso, para a alimentação de alguns circuitos utilizados eram necessárias tensões de 5V e 9V. Por isso, a placa de alimentação foi composta por um boost, responsável por elevar a tensão fornecida pela bateria até 9V. Essa é tensão que alimenta o circuito do motor, e para os outros circuitos, utilizou-se um [regulador de tensão 7805](https://www.sparkfun.com/datasheets/Components/LM7805.pdf), que fornece como saída 5V, que irá alimentar o microcontrolador, o qual será o responsável por fornecer a tensão necessário para os outros circuitos.
 
-Abaixo é possível observar o esquemático utilizado para a alimentação.
+Na Figura 16 é possível observar o esquemático utilizado para a alimentação.
 
 <p align="center">
   <img width="600"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/alimentacao.png">
