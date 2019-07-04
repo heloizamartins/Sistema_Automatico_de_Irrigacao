@@ -1,7 +1,7 @@
-# Sistema Automático de Irrigação - nome do produto
+# Sistema Automático de Irrigação
 
 ## Sumário
-1. [SmartPot](#Nome-do-Produto)
+1. [Autonomous Pot Plant - ApoPlant](#ApoPlant)
 	* [Descrição do Produto](#Descricao-do-Produto)
 	* [Produtos Existentes](#Produtos-Existentes)
 2. [Desenvolvimento do Produto](#desenvolvimento)
@@ -15,7 +15,7 @@
 
 ### 
 
-# <a name=Nome-do-Produto></a> Nome do Produto
+# <a name=ApoPlant></a> Autonomous Pot Plant - ApoPlant
 ## Descrição do Produto <a name=Descricao-do-Produto>
 Muitas pessoas, hoje em dia, tem plantas nas suas residências, porém não providenciam cuidado necessário a elas, como por exemplo não irrigar no tempo adequado. Por isso, este produto tem como objetivo  possuir um sistema automático para o controle de irrigação de plantas, tanto com a quantidade e a distribuição de água como o horário em que será fornecida. Isso tudo será automático, pré-definido pelo próprio usuário, de acordo com a planta monitorada, utilizando comunicação wireless.
 
@@ -28,7 +28,7 @@ O produto conterá um sensor de umidade de solo, que fornecerá informações so
 Para a definição deste produto, realizou-se uma pesquisa de mercado, onde foram destacadas as principais características existentes, apresentados na tabela abaixo.
 
 --------------------------------------------------------------------------------------------------------------------------------------
-Características	    		|    Lechuza   	| Oasis                  	| HIDROFERTI  			|   NOME              
+Características	    		|    Lechuza   	| Oasis                  	| HIDROFERTI  			|   ApoPlant            
 --------------------------------|---------------|-------------------------------|-------------------------------|----------------------
 Indicador de Nível de água      | x    		|                    		|				|x
 Reservatório de água     	| x    		| x         			| x				|x
@@ -74,36 +74,33 @@ A leitura destes dados foi realizada pelo ADC do microcontrolador, assim como os
 
 ## Sensor de Nível de Água <a name=Sensor-de-Nivel-de-agua>
 
-Para medir o nível d’água optou-se por produzir um sensor capacitivo de placa interdigitada, cujo layout pode ser visto a seguir. 
+Para medir o nível d’água optou-se por produzir um sensor capacitivo de placa interdigitada, cujo layout pode ser visto a seguir, com as suas dimensões. 
 
 <p align="center">
   <img width="80"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Placa_Interdigitada.jpg">
 </p>
 
-Um capacitor interdigitado é uma estrutura coplanar que contém múltiplos eletrodos de pentes interpenetrante, e seu princípio de funcionamento é similar a de um capacitor de placas paralelas. Ao aplicar uma diferença de potencial em cada pente de eletrodos, é gerado um campo elétrico entre o positivo e o negativo dos eletrodos. A partir desse campo, do material e das dimensões da placa, é possível obter o valor da capacitância.
+Um capacitor interdigitado é composto por uma estrutura coplanar que contém múltiplos eletrodos de pentes interpenetrante, e seu princípio de funcionamento é similar a de um capacitor de placas paralelas. Ao aplicar uma diferença de potencial em cada pente de eletrodos, é gerado um campo elétrico entre o positivo e o negativo dos eletrodos. A partir desse campo, do material e das dimensões da placa, é possível obter o valor da capacitância, que irá variar de acordo com a quantidade de água e de ar em contato com o capacitor.
 
-Para realizar a medida do nível de água, é lido o valor de tensão nos terminais do capacitor, que irá variar de acordo com a quantidade de água e de ar em contato com o capacitor.
+Para realizar a medida do nível de água, é lido o valor de tensão nos terminais do capacitor a partir de um circuito RC, apresentado abaixo, onde dois sinais de PWM complementares são gerados pelo mesmo *Timer*, porém com dois canais diferentes, um para a carga e um para a descarga do capacitor, com frequência de 200Hz e razão cíclica de 30% (3,5ms de tempo de descarga). O carregamento é feito pelo resistor de 100kΩ e o descarregamento pelo 8,2MΩ, a escolha desses resistores foi feita de modo a se obter um tempo carga relativamente alto, e um tempo de descarga lento, melhorando assim a precisão das leituras.
 
-Para isso, utilizou-se um circuito RC, apresentado abaixo, onde dois sinais de PWM opostos são gerados pelo mesmo *Timer*, porém com dois canais diferentes, para a carga e a descarga do capacitor com frequência de 200Hz e razão cíclica de 30% (3,5ms de descarga). O carregamento é feito pelo Resistor de 100k e o descarregamento pelo 8.2M. Para configurar o ADC utilizou-se o modo *output compare* do terceiro canal do *Timer*, onde ele irá adquirir a medida a cada 2ms (0,5ms após a descarga do capacitor), garantindo assim a sincronização temporal do efeito RC com a aquisição da medida.
+Realizou-se a configuração do ADC com o modo *output compare* do terceiro canal do mesmo *Timer* utilizado para gerar o PWM, garantindo assim a sincronização temporal do efeito RC com a aquisição da medida. Esse canal irá adquirir a medida a cada 2ms (0,5ms após o início da descarga do capacitor), evidenciado pelo sinal obtido no osciloscópio.
 
 <p align="center">
   <img width="600"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/RC%20CIRCUIT%20CAPACITOR.png">
 </p>
 	
-Assim como o sensor de umidade, foi realizada uma média com 8 amostras obtidas. A Figura a seguir mostra a carga e descarga do capacitor, assim como o instante que foi feita a aquisição do valor de tensão (500us após o início da descarga do capacitor).
-
 <p align="center">
   <img width="300"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/TEK0001.JPG">
 </p>
 
-Como o objetivo de se utilizar o sensor capacitivo era o de medir o nível de água no reservatório do sistema, a tensão medida foi convertida em milímetros. O gráfico a seguir mostra a variância da altura da água no reservatório em relação ao valor de ADC lido no mesmo instante. A partir desses pontos, gerou-se uma equação, para converter todos os valores lidos em mm. Dessa maneira, o usuário pode saber aproximadamente qual a quantidade de água que ainda há no seu reservatório. 
-
-Além disso, também foi implementada uma sinalização que avisa ao usuário quando não há mais água o suficiente no reservatório, sendo que, quando o sinal está em 1, significa que há pouca ou nenhuma água no recipiente, e quando o sinal está em 0, significa que ainda há água o suficiente para a irrigação.
+Como o objetivo de se utilizar o sensor capacitivo era o de medir o nível de água no reservatório do sistema, realizou-se a média com 8 amostras, e posteriormente converteu-se esse valor para milímetros. Isso foi efetuado a partir da equação gerada pela linha de tendência do gráfico abaixo, que apresenta a variância da altura da água no reservatório em relação à tensão. Dessa maneira, o usuário tem informação sobre a quantidade de água restante no seu reservatório. 
 
 <p align="center">
   <img width="500"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/tensaoxNivel.png">
 </p>
 
+Além disso, implementou-se uma sinalização que avisa ao usuário quando não há mais água o suficiente no reservatório, sendo que, quando o sinal está em 1, significa que há pouca ou nenhuma água, e quando o sinal está em 0, significa que ainda há água o suficiente para a irrigação.
 
 ## Motor <a name=Motor>
 	
