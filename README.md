@@ -1,7 +1,7 @@
-# Sistema Automático de Irrigação - nome do produto
+# Sistema Automático de Irrigação
 
 ## Sumário
-1. [SmartPot](#Nome-do-Produto)
+1. [Autonomous Pot Plant - ApoPlant](#ApoPlant)
 	* [Descrição do Produto](#Descricao-do-Produto)
 	* [Produtos Existentes](#Produtos-Existentes)
 2. [Desenvolvimento do Produto](#desenvolvimento)
@@ -15,7 +15,7 @@
 
 ### 
 
-# <a name=Nome-do-Produto></a> Nome do Produto
+# <a name=ApoPlant></a> Autonomous Pot Plant - ApoPlant
 ## Descrição do Produto <a name=Descricao-do-Produto>
 Muitas pessoas, hoje em dia, tem plantas nas suas residências, porém não providenciam cuidado necessário a elas, como por exemplo não irrigar no tempo adequado. Por isso, este produto tem como objetivo  possuir um sistema automático para o controle de irrigação de plantas, tanto com a quantidade e a distribuição de água como o horário em que será fornecida. Isso tudo será automático, pré-definido pelo próprio usuário, de acordo com a planta monitorada, utilizando comunicação wireless.
 
@@ -28,7 +28,7 @@ O produto conterá um sensor de umidade de solo, que fornecerá informações so
 Para a definição deste produto, realizou-se uma pesquisa de mercado, onde foram destacadas as principais características existentes, apresentados na tabela abaixo.
 
 --------------------------------------------------------------------------------------------------------------------------------------
-Características	    		|    Lechuza   	| Oasis                  	| HIDROFERTI  			|   NOME              
+Características	    		|    Lechuza   	| Oasis                  	| HIDROFERTI  			|   ApoPlant            
 --------------------------------|---------------|-------------------------------|-------------------------------|----------------------
 Indicador de Nível de água      | x    		|                    		|				|x
 Reservatório de água     	| x    		| x         			| x				|x
@@ -49,23 +49,23 @@ Além desses produtos, também foram encontrados alguns projetos feitos para uso
 
 ## Sensor de Umidade <a name=Sensor-de-Umidade>
 	
-Para a verificação da umidade do solo, utilizou-se o sensor de umidade do solo Higrômetro HL-69 apresentado na Figura abaixo. O princípio de funcionamento deste sensor é baseado na aplicação de uma determinada corrente nos seus eletrodos existentes nas hastes, assim é possível estimar quão úmido o solo está, devido a condutividade do mesmo. Sendo que, quando o substrato estiver úmido há uma condutividade maior, que resulta num fluxo maior de corrente entre os dois eletrodos, e quando estiver seco, ocorrerá o oposto, ou seja  há uma redução neste fluxo. 
+Para a verificação da umidade do solo, utilizou-se o sensor de umidade do solo Higrômetro HL-69 apresentado na Figura 3. O princípio de funcionamento deste sensor é baseado na aplicação de uma determinada corrente nos seus eletrodos existentes nas hastes, assim é possível estimar quão úmido o solo está, devido a condutividade do mesmo. Sendo que, quando o substrato estiver úmido há uma condutividade maior, que resulta num fluxo maior de corrente entre os dois eletrodos, e quando estiver seco, ocorrerá o oposto, ou seja  há uma redução neste fluxo. 
 
 
 <p align="center">
   <img width="300"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/sensor-de-umidade-do-solo-higrmetro.jpg">
 </p>
 
-O circuito empregado para a aquisição de dados foi um divisor de tensão alimentado a 3V3, representado pela Figura abaixo. Os dois pinos do sensor estão em série com o resistor de 10㏀, e em paralelo com o capacitor de 10nF, que tem a função de remover os picos indesejados nos trilhos de energia. A saída do divisor é conectada ao conversor AD do microcontrolador STM32F103C8 para ler o seu valor de tensão que é proporcional à resistência do sensor. Essa irá ser máxima e muito maior que 10㏀, quando o solo está seco, assim, a saída irá ter o mesmo valor de alimentação (efeito pull-up do resistor de 10㏀). Caso contrário, a saída terá o valor referente à queda de tensão na eletrodos do sensor, que será um valor bem menor.
+O circuito empregado para a aquisição de dados foi um divisor de tensão alimentado a 3V3, representado pela Figura 4. Os dois pinos do sensor estão em série com o resistor de 10㏀, e em paralelo com o capacitor de 10nF, que tem a função de remover os picos indesejados nos trilhos de energia. A saída do divisor é conectada ao conversor AD do microcontrolador STM32F103C8 para ler o seu valor de tensão que é proporcional à resistência do sensor. Essa irá ser máxima e muito maior que 10㏀, quando o solo está seco, assim, a saída irá ter o mesmo valor de alimentação (efeito pull-up do resistor de 10㏀). Caso contrário, a saída terá o valor referente à queda de tensão na eletrodos do sensor, que será um valor bem menor.
 
 <p align="center">
   <img width="400"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/sensor_Umidade_circuito.jpg">
 </p>
 
-Foram feitos testes deste sensor com a planta Avenca e os dados foram adquiridos num período de 6 horas com um intervalo de uma hora entre cada aquisição. Então, gerou-se o gráfico da Figura abaixo, sendo que o primeiro dado foi obtido logo após a primeira e única irrigação que houve naquele dia.
+Foram feitos testes deste sensor com a planta Avenca e os dados foram adquiridos num período de 6 horas com um intervalo de uma hora entre cada aquisição. Então, gerou-se o gráfico da Figura 5, sendo que o primeiro dado foi obtido logo após a primeira e única irrigação que houve naquele dia.
 
 <p align="center">
-  <img width="400"  src="">
+  <img width="400"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/UmidadexTempo.png">
 </p>
 
 
@@ -74,42 +74,39 @@ A leitura destes dados foi realizada pelo ADC do microcontrolador, assim como os
 
 ## Sensor de Nível de Água <a name=Sensor-de-Nivel-de-agua>
 
-Para medir o nível d’água optou-se por produzir um sensor capacitivo de placa interdigitada, cujo layout pode ser visto a seguir. 
+Para medir o nível d’água optou-se por produzir um sensor capacitivo de placa interdigitada, cujo layout pode ser visto na Figura 6, com as suas dimensões. 
 
 <p align="center">
   <img width="80"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Placa_Interdigitada.jpg">
 </p>
 
-Um capacitor interdigitado é uma estrutura coplanar que contém múltiplos eletrodos de pentes interpenetrante, e seu princípio de funcionamento é similar a de um capacitor de placas paralelas. Ao aplicar uma diferença de potencial em cada pente de eletrodos, é gerado um campo elétrico entre o positivo e o negativo dos eletrodos. A partir desse campo, do material e das dimensões da placa, é possível obter o valor da capacitância.
+Um capacitor interdigitado é composto por uma estrutura coplanar que contém múltiplos eletrodos de pentes interpenetrante, e seu princípio de funcionamento é similar a de um capacitor de placas paralelas. Ao aplicar uma diferença de potencial em cada pente de eletrodos, é gerado um campo elétrico entre o positivo e o negativo dos eletrodos. A partir desse campo, do material e das dimensões da placa, é possível obter o valor da capacitância, que irá variar de acordo com a quantidade de água e de ar em contato com o capacitor.
 
-Para realizar a medida do nível de água, é lido o valor de tensão nos terminais do capacitor, que irá variar de acordo com a quantidade de água e de ar em contato com o capacitor.
+Para realizar a medida do nível de água, é lido o valor de tensão nos terminais do capacitor a partir de um circuito RC, Figuras 7 e 8, onde dois sinais de PWM complementares são gerados pelo mesmo *Timer*, porém com dois canais diferentes, um para a carga e um para a descarga do capacitor, com frequência de 200Hz e razão cíclica de 30% (3,5ms de tempo de descarga). O carregamento é feito pelo resistor de 100kΩ e o descarregamento pelo 8,2MΩ, a escolha desses resistores foi feita de modo a se obter um tempo carga relativamente alto, e um tempo de descarga lento, melhorando assim a precisão das leituras.
 
-Para isso, utilizou-se um circuito RC, apresentado abaixo, onde dois sinais de PWM opostos são gerados pelo mesmo *Timer*, porém com dois canais diferentes, para a carga e a descarga do capacitor com frequência de 200Hz e razão cíclica de 30% (3,5ms de descarga). O carregamento é feito pelo Resistor de 100k e o descarregamento pelo 8.2M. Para configurar o ADC utilizou-se o modo *output compare* do terceiro canal do *Timer*, onde ele irá adquirir a medida a cada 2ms (0,5ms após a descarga do capacitor), garantindo assim a sincronização temporal do efeito RC com a aquisição da medida.
+Realizou-se a configuração do ADC com o modo *output compare* do terceiro canal do mesmo *Timer* utilizado para gerar o PWM, garantindo assim a sincronização temporal do efeito RC com a aquisição da medida. Esse canal irá adquirir a medida a cada 2ms (0,5ms após o início da descarga do capacitor), evidenciado pela Figura 9.
 
 <p align="center">
   <img width="600"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/RC%20CIRCUIT%20CAPACITOR.png">
 </p>
 	
-Assim como o sensor de umidade, foi realizada uma média com 8 amostras obtidas. A Figura a seguir mostra a carga e descarga do capacitor, assim como o instante que foi feita a aquisição do valor de tensão (500us após o início da descarga do capacitor).
-
 <p align="center">
   <img width="300"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/TEK0001.JPG">
 </p>
 
-Como o objetivo de se utilizar o sensor capacitivo era o de medir o nível de água no reservatório do sistema, a tensão medida foi convertida em milímetros. O gráfico a seguir mostra a variância da altura da água no reservatório em relação ao valor de ADC lido no mesmo instante. A partir desses pontos, gerou-se uma equação, para converter todos os valores lidos em mm. Dessa maneira, o usuário pode saber aproximadamente qual a quantidade de água que ainda há no seu reservatório. 
-
-Além disso, também foi implementada uma sinalização que avisa ao usuário quando não há mais água o suficiente no reservatório, sendo que, quando o sinal está em 1, significa que há pouca ou nenhuma água no recipiente, e quando o sinal está em 0, significa que ainda há água o suficiente para a irrigação.
+Como o objetivo de se utilizar o sensor capacitivo era o de medir o nível de água no reservatório do sistema, realizou-se a média com 8 amostras, e posteriormente converteu-se esse valor para milímetros. Isso foi efetuado a partir da equação gerada pela linha de tendência do gráfico da Figura 10, que apresenta a variância da altura da água no reservatório em relação à tensão. Dessa maneira, o usuário tem informação sobre a quantidade de água restante no seu reservatório. 
 
 <p align="center">
   <img width="500"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/tensaoxNivel.png">
 </p>
 
+Além disso, implementou-se uma sinalização que avisa ao usuário quando não há mais água o suficiente no reservatório, sendo que, quando o sinal está em 1, significa que há pouca ou nenhuma água, e quando o sinal está em 0, significa que ainda há água o suficiente para a irrigação.
 
 ## Motor <a name=Motor>
 	
-O motor escolhido para fazer parte do produto foi uma bomba d'água submersível, de 3,6 V com capacidade de 120L/h, que pode ser vista na Figura que segue. O acionamento do motor é feito por um regulador de corrente, LM317, controlado por tensão, limitando uma corrente máxima necessária para o seu funcionamento.  A tensão de entrada é adquirida por um sinal de PWM gerado pelo microcontrolador, o qual modifica a velocidade do motor de acordo com o *duty cycle* definido. 
+O motor escolhido para fazer parte do produto foi uma bomba d'água submersível, de 3,6 V com capacidade de 120L/h, que pode ser vista na Figura 12. O acionamento do motor é feito por um regulador de corrente, LM317, controlado por tensão, limitando uma corrente máxima necessária para o seu funcionamento.  A tensão de entrada é adquirida por um sinal de PWM gerado pelo microcontrolador, o qual modifica a velocidade do motor de acordo com o *duty cycle* definido. 
 
-Na saída do microcontrolador utilizou-se o um transistor como inversor garantindo uma tensão de 5V quando está em alto em vez de 3.3V, tensão necessária para o funcionamento do circuito. O amplificador TL071 opera como seguidor de tensão, o qual tem a finalidade de de isolar as variações do sinal de PWM do transistor BC337, tendo assim mais segurança de que não haverá interferência no circuito. O transistor BC337 atua como amplificador de corrente.
+Na saída do microcontrolador utilizou-se o um transistor como inversor garantindo uma tensão de 5V quando está em alto em vez de 3.3V, tensão necessária para o funcionamento do circuito, apresentado na Figura 11. O amplificador TL071 opera como seguidor de tensão, o qual tem a finalidade de isolar as variações do sinal de PWM do transistor BC337, tendo assim mais segurança de que não haverá interferência no circuito e o transistor BC337 atua como amplificador de corrente.
 
 <p align="center">
   <img width="800"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Motor.jpg">
