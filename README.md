@@ -101,13 +101,13 @@ Realizou-se a configuração do ADC com o modo *output compare* do terceiro cana
   <img width="300"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/TEK0001.JPG">
 </p>
 
-Como o objetivo de se utilizar o sensor capacitivo era o de medir o nível de água no reservatório do sistema, realizou-se a média com 8 amostras, e posteriormente converteu-se esse valor para milímetros. Isso foi efetuado a partir da equação gerada pela linha de tendência do gráfico da Figura 10, que apresenta a variância da altura da água no reservatório em relação à tensão. Dessa maneira, o usuário tem informação sobre a quantidade de água restante no seu reservatório. 
+Como o objetivo de se utilizar o sensor capacitivo era o de medir o nível de água no reservatório do sistema, realizou-se a média com 8 amostras, e posteriormente converteu-se esse valor para milímetros. Isso foi efetuado a partir da equação gerada pela linha de tendência do gráfico da Figura 10, que apresenta a variação da altura da água no reservatório em relação à tensão. Dessa maneira, o usuário tem informação sobre a quantidade de água restante no seu reservatório. 
 
 <p align="center">
   <img width="500"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/tensaoxNivel.png">
 </p>
 
-Além disso, implementou-se uma sinalização que avisa ao usuário quando não há mais água o suficiente no reservatório, sendo que, quando o sinal está em 1, significa que há pouca ou nenhuma água, e quando o sinal está em 0, significa que ainda há água o suficiente para a irrigação.
+Além disso, implementou-se uma sinalização que avisa ao usuário quando não há mais água o suficiente no reservatório (foi definido um mínimo de 25mm, evintando que o motor ligue sem ter água), sendo que, quando o sinal está em 1, significa que há pouca ou nenhuma água, e quando o sinal está em 0, significa que ainda há água o suficiente para a irrigação.
 
 ## Motor <a name=Motor>
 	
@@ -162,23 +162,31 @@ Na Figura 16 é possível observar o esquemático utilizado para a alimentação
 
 # <a name=Resultados></a> Resultados
 
-
+As Figuras 17 e 18 representam a placa de controle e acionamento e a placa de alimentação, respectivamente. Optou-se pelo uso de uma placa separada para a alimentação para o reaproveitamento deste módulo para outros projetos.
 
 <p align="center">
   <img width="800"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/Placa_final_alimentacao_controle.jpg">
 </p>
 
-<p align="center">
-  <img width="800"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/gabinete.jpg">
-</p>
+Realizou-se os testes do sistema com a planta avenca, Figura 19, com foi citado anteriormente, e foram feitos furos no pote onde ela foi inserida, para evitar o afogamento das raízes da planta. Além disso, para impedir que saia terra por esses furos, utilizou-se o tecido feltro. 
 
 <p align="center">
   <img width="500"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/plant.jpg">
 </p>
 
+Na Figura 20 pode ser visto o produto completo, incluindo o reservatório de água, com o motor e o sensor de nível, o vaso contendo a planta, o sensor de nível e a mangueira que vem do reservatório e o gabinete que contém as placas das Figuras 17 e 18. Como o gabinete foi feito com madeira, aplicou-se resina dentro do reservatório de água e dentro do vaso para evitar o infiltramento e o vazamento d’água.
+
+<p align="center">
+  <img width="800"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/gabinete.jpg">
+</p>
+
+Com a estrutura montada, e os códigos já implementados, foi verificado o funcionamento do sistema, e na Figura 21 podem ser vistos dois prints do aplicativo **MQTT Dash**, um apresentando o motor desligado, e o outro ligado, devido a umidade (9%) ser menor que a definida pelo usuário (15%).
+
 <p align="center">
   <img width="400"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/MQTT_DASH_Motor.png">
 </p>
+
+No primeiro print da Figura 22, tem-se a sinalização do nível de água ativada, devido ao nível d’água ser menor que 10mm, e no segundo está desativada.
 
 <p align="center">
   <img width="400"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/MQTT_DASH_LW.png">
