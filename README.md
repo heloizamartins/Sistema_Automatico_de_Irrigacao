@@ -47,6 +47,8 @@ Além desses produtos, também foram encontrados alguns projetos feitos para uso
 
 # <a name=desenvolvimento></a> Desenvolvimento do Produto
 
+Para a implementação deste produto, utilizou-se um sensor de umidade, uma bomba d'água submersível,  um sensor capacitivo interdigitado, um módulo de comunicação Wi-Fi, um módulo de alimentação e o microcontrolador  STM32F103C8, Figura 2, que foi utilizado para realizar a programação do sistema.
+
 <p align="center">
   <img width="300"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/blue-pill-stm32duino.jpg">
 </p>
