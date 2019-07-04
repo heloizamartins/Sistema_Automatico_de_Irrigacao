@@ -186,11 +186,15 @@ Com a estrutura montada, e os códigos já implementados, foi verificado o funci
   <img width="400"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/MQTT_DASH_Motor.png">
 </p>
 
-No primeiro print da Figura 22, tem-se a sinalização do nível de água ativada, devido ao nível d’água ser menor que 10mm, e no segundo está desativada.
+No primeiro print da Figura 22, tem-se a sinalização do nível de água ativada, devido ao nível d’água ser menor que 25mm, e no segundo está desativada, pois o valor medido (27mm) é maior do que o definido para ativar esta sinalização.
 
 <p align="center">
   <img width="400"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/MQTT_DASH_LW.png">
 </p>
+
+Após realizar alguns testes, foi verificado que o sistema parava de funcionar após um determinado tempo. Percebeu-se que o problema vinha da placa de alimentação, em específico da bateria, onde a sua tensão máximo é de 3,8V. No entanto, o módulo boost, utilizado para elevar a tensão da bateria, necessita de uma tensão de entrada mínima de 3V para seu funcionamento adequado, logo, assim que a bateria chega nessa tensão, o sistema precisa ser recarregado.
+
+Para calcular o tempo de funcionamento do sistema apenas com o uso da bateria realizou-se o seguinte teste: primeiro, a bateria foi carregada com seu valor máximo de tensão, e em seguida, a cada 15 minutos foram feitas medidas da tensão, até que esse valor reduzisse em 3V, o gráfico com estes valores é apresentado na Figura 23. A partir desse teste, teve-se que o sistema tem uma autonomia de aproximadamente 1h30min.
 
 <p align="center">
   <img width="400"  src="https://github.com/heloizamartins/Sistema_Automatico_de_Irrigacao/blob/master/Figuras/TensaoxTempo.jpg">
