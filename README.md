@@ -12,7 +12,8 @@
 	* [Alimentação](#Alimentacao)
 3. [Resultados](#Resultados)
 4. [Considerações Finais](#consideracoes)
-5. [Referências](#referencia)
+5. [Link - Funcionamento do Sistema](#link)
+6. [Referências](#referencia)
 
 
 ### 
@@ -207,6 +208,12 @@ Para calcular o tempo de funcionamento do sistema apenas com o uso da bateria re
 </p>
 
 # <a name=consideracoes></a> Considerações Finais
+
+Foram observados alguns pontos críticos durante o funcionamento do produto, uma delas é o atraso da leitura da umidade após a irrigação, pois o substrato necessita de um período longo para absorver a água, logo o valor terá que ser medido após isso ocorrer. Além disso, a quantidade de água que vinha da mangueira era alta, porém isso pode ser melhorado com um sistema de gotejamento e por uma redução da corrente do motor empregando uma razão cíclica, do sinal de PWM, inferior.
+
+Outro ponto que foi observado é a durabilidade da bateria devido ao consumo elevado de corrente do sistema. Neste produto, já existe uma solução que é o módulo carregador USB, logo ele pode funcionar mesmo sem ter uma carga suficiente na bateria. No entanto, uma solução mais adequada seria utilizar o modo *sleep* quando o sistema não precisa realizar nenhuma medida, como por exemplo quando é feita uma irrigação, esse poderá entrar no modo sleep até ocorrer a absorção da água pelo solo.  
+
+# <a name=link></a> Link - Funcionamento do Sistema
 
 # <a name=referencia></a> Referências
 
